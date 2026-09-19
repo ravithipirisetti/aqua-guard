@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Alerts</title>
+
+    <link rel="stylesheet" href="user-alerts.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">💧</div>
+
+            <div>
+                <h1>AQUA GUARD</h1>
+                <span>SMART WATER MANAGEMENT</span>
+            </div>
+        </div>
+
+        <div class="user-profile">
+            <div class="profile-avatar">U</div>
+
+            <div>
+                <strong>User Account</strong>
+                <span>Household • AG-001</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-dashboard.html'">
+                <span>▣</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-water-usage.html'">
+                <span>💧</span>
+                Water Usage
+            </button>
+
+            <button class="nav-item active">
+                <span>⚠</span>
+                Alerts
+                <b>2</b>
+            </button>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-reports.html'">
+                <span>📊</span>
+                Reports
+            </button>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-settings.html'">
+                <span>⚙</span>
+                Settings
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button class="support-btn" onclick="showSupport()">
+                <span>?</span>
+                Support
+            </button>
+
+            <button class="logout-btn" onclick="goHome()">
+                <span>↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <span class="eyebrow">WATER MONITORING</span>
+                <h2>Alerts</h2>
+            </div>
+
+            <div class="topbar-right">
+
+                <button class="notification-btn"
+                    onclick="showNotifications()">
+                    🔔
+                    <span>2</span>
+                </button>
+
+                <div class="top-profile">
+                    <div class="profile-avatar">U</div>
+
+                    <div>
+                        <strong>User Account</strong>
+                        <span>Household • AG-001</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+        <section class="content">
+
+            <div class="page-intro">
+
+                <div>
+                    <span class="section-label">SYSTEM NOTIFICATIONS</span>
+
+                    <h1>Water Alerts</h1>
+
+                    <p>
+                        Stay informed about your household water
+                        consumption and Aqua Guard system activity.
+                    </p>
+                </div>
+
+                <div class="status-pill">
+                    <span></span>
+                    SYSTEM ONLINE
+                </div>
+
+            </div>
+
+
+            <!-- SUMMARY CARDS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon warning">⚠</div>
+
+                    <div>
+                        <span>ACTIVE ALERTS</span>
+                        <h2>2</h2>
+                        <p>Needs your attention</p>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon usage">💧</div>
+
+                    <div>
+                        <span>HIGH USAGE</span>
+                        <h2>1</h2>
+                        <p>Usage above usual level</p>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon system">✓</div>
+
+                    <div>
+                        <span>SYSTEM STATUS</span>
+                        <h2>Normal</h2>
+                        <p>All sensors communicating</p>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon resolved">✓</div>
+
+                    <div>
+                        <span>RESOLVED TODAY</span>
+                        <h2>3</h2>
+                        <p>Alerts handled</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- ALERT LIST -->
+            <div class="alerts-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="section-label">RECENT ACTIVITY</span>
+                        <h2>Your Alerts</h2>
+                    </div>
+
+                    <select id="alertFilter"
+                        onchange="filterAlerts()">
+
+                        <option value="all">All Alerts</option>
+                        <option value="high">High Usage</option>
+                        <option value="system">System</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ALERT 1 -->
+                <div class="alert-item" data-type="high">
+
+                    <div class="alert-icon high">
+                        ⚠
+                    </div>
+
+                    <div class="alert-content">
+
+                        <div class="alert-title-row">
+
+                            <h3>Higher Water Usage Detected</h3>
+
+                            <span class="alert-badge high">
+                                HIGH USAGE
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Your household water usage was higher
+                            than your usual consumption during the
+                            afternoon.
+                        </p>
+
+                        <div class="alert-meta">
+                            <span>💧 Today, 2:35 PM</span>
+                            <span>184 L used</span>
+                        </div>
+
+                    </div>
+
+                    <button class="view-btn"
+                        onclick="viewAlert(this)">
+                        View
+                    </button>
+
+                </div>
+
+
+                <!-- ALERT 2 -->
+                <div class="alert-item" data-type="high">
+
+                    <div class="alert-icon high">
+                        ⚠
+                    </div>
+
+                    <div class="alert-content">
+
+                        <div class="alert-title-row">
+
+                            <h3>Daily Water Limit Approaching</h3>
+
+                            <span class="alert-badge high">
+                                LIMIT
+                            </span>
+
+                        </div>
+
+                        <p>
+                            You have used 73.6% of your daily
+                            water allowance. Only 66 L remain.
+                        </p>
+
+                        <div class="alert-meta">
+                            <span>💧 Today, 1:50 PM</span>
+                            <span>184 / 250 L</span>
+                        </div>
+
+                    </div>
+
+                    <button class="view-btn"
+                        onclick="viewAlert(this)">
+                        View
+                    </button>
+
+                </div>
+
+
+                <!-- ALERT 3 -->
+                <div class="alert-item" data-type="system">
+
+                    <div class="alert-icon system">
+                        ✓
+                    </div>
+
+                    <div class="alert-content">
+
+                        <div class="alert-title-row">
+
+                            <h3>System Check Complete</h3>
+
+                            <span class="alert-badge system">
+                                SYSTEM
+                            </span>
+
+                        </div>
+
+                        <p>
+                            All Aqua Guard sensors are communicating
+                            normally and the borewell monitoring
+                            system is operational.
+                        </p>
+
+                        <div class="alert-meta">
+                            <span>🔧 Today, 12:00 PM</span>
+                            <span>System Normal</span>
+                        </div>
+
+                    </div>
+
+                    <button class="view-btn"
+                        onclick="viewAlert(this)">
+                        View
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- WATER SAFETY MESSAGE -->
+            <div class="info-panel">
+
+                <div class="info-icon">💧</div>
+
+                <div>
+                    <h3>Water Usage Reminder</h3>
+
+                    <p>
+                        Keeping your daily consumption within the
+                        household limit helps reduce unnecessary
+                        borewell pumping and supports responsible
+                        water management.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <footer>
+
+                <span>
+                    Aqua Guard • Smart Water Management
+                </span>
+
+                <span>
+                    Last updated:
+                    <strong id="lastUpdated">--:--</strong>
+                </span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="user-alerts.js"></script>
+
+</body>
+</html>

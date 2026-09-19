@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Water Usage</title>
+
+    <link rel="stylesheet" href="admin-water-usage.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <header class="page-header">
+
+            <div>
+                <span>ADMIN CONTROL CENTER</span>
+                <h1>Water Usage</h1>
+                <p>Monitor water consumption across all registered households.</p>
+            </div>
+
+            <button onclick="goBackToDashboard()" class="back-btn">
+                ← Dashboard
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+                <span>TODAY'S TOTAL USAGE</span>
+                <strong>4,286 L</strong>
+                <small>Across all households</small>
+            </div>
+
+            <div class="summary-card">
+                <span>AVERAGE PER HOUSEHOLD</span>
+                <strong>178.6 L</strong>
+                <small>Daily average</small>
+            </div>
+
+            <div class="summary-card">
+                <span>ACTIVE BOREWELLS</span>
+                <strong>8</strong>
+                <small>Currently running</small>
+            </div>
+
+            <div class="summary-card warning-card">
+                <span>OVER DAILY LIMIT</span>
+                <strong>3</strong>
+                <small>Households</small>
+            </div>
+
+        </section>
+
+
+        <!-- COMMUNITY CHART -->
+
+        <section class="usage-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <span>COMMUNITY MONITORING</span>
+                    <h2>Weekly Water Consumption</h2>
+                </div>
+
+                <div class="period">
+                    This Week
+                </div>
+
+            </div>
+
+            <div class="chart">
+
+                <div class="bar-group">
+                    <div class="bar" style="height: 58%;"></div>
+                    <span>Mon</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar" style="height: 72%;"></div>
+                    <span>Tue</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar" style="height: 63%;"></div>
+                    <span>Wed</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar" style="height: 81%;"></div>
+                    <span>Thu</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar" style="height: 68%;"></div>
+                    <span>Fri</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar" style="height: 92%;"></div>
+                    <span>Sat</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar today" style="height: 76%;"></div>
+                    <span>Sun</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HOUSEHOLD USAGE -->
+
+        <section class="usage-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <span>HOUSEHOLD MONITORING</span>
+                    <h2>Today's Consumption</h2>
+                </div>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search household..."
+                    onkeyup="searchUsage()"
+                >
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table id="usageTable">
+
+                    <thead>
+
+                        <tr>
+                            <th>Household</th>
+                            <th>Name</th>
+                            <th>Daily Limit</th>
+                            <th>Used Today</th>
+                            <th>Usage</th>
+                            <th>Borewell</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td><strong>AG-001</strong></td>
+                            <td>Demo Residence</td>
+                            <td>250 L</td>
+                            <td>184 L</td>
+                            <td>
+                                <div class="usage-progress">
+                                    <div class="progress-bar">
+                                        <span style="width: 74%;"></span>
+                                    </div>
+                                    <small>73.6%</small>
+                                </div>
+                            </td>
+                            <td><span class="motor active">Running</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>AG-002</strong></td>
+                            <td>Green Residency</td>
+                            <td>250 L</td>
+                            <td>267 L</td>
+                            <td>
+                                <div class="usage-progress">
+                                    <div class="progress-bar">
+                                        <span class="over" style="width: 100%;"></span>
+                                    </div>
+                                    <small>106.8%</small>
+                                </div>
+                            </td>
+                            <td><span class="motor">Stopped</span></td>
+                            <td><span class="status warning">Over Limit</span></td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>AG-003</strong></td>
+                            <td>Lake View Homes</td>
+                            <td>200 L</td>
+                            <td>143 L</td>
+                            <td>
+                                <div class="usage-progress">
+                                    <div class="progress-bar">
+                                        <span style="width: 72%;"></span>
+                                    </div>
+                                    <small>71.5%</small>
+                                </div>
+                            </td>
+                            <td><span class="motor active">Running</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>AG-004</strong></td>
+                            <td>Sunrise Apartments</td>
+                            <td>300 L</td>
+                            <td>312 L</td>
+                            <td>
+                                <div class="usage-progress">
+                                    <div class="progress-bar">
+                                        <span class="over" style="width: 100%;"></span>
+                                    </div>
+                                    <small>104%</small>
+                                </div>
+                            </td>
+                            <td><span class="motor">Stopped</span></td>
+                            <td><span class="status warning">Over Limit</span></td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>AG-005</strong></td>
+                            <td>Green Valley Home</td>
+                            <td>250 L</td>
+                            <td>198 L</td>
+                            <td>
+                                <div class="usage-progress">
+                                    <div class="progress-bar">
+                                        <span style="width: 79%;"></span>
+                                    </div>
+                                    <small>79.2%</small>
+                                </div>
+                            </td>
+                            <td><span class="motor active">Running</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>AG-006</strong></td>
+                            <td>River View Residency</td>
+                            <td>250 L</td>
+                            <td>221 L</td>
+                            <td>
+                                <div class="usage-progress">
+                                    <div class="progress-bar">
+                                        <span style="width: 88%;"></span>
+                                    </div>
+                                    <small>88.4%</small>
+                                </div>
+                            </td>
+                            <td><span class="motor">Stopped</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            Aqua Guard Admin Portal • Demo Prototype
+        </footer>
+
+    </div>
+
+
+    <script src="admin-water-usage.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | User Dashboard</title>
+
+    <link rel="stylesheet" href="user-dashboard.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">💧</div>
+
+            <div>
+                <h2>AQUA GUARD</h2>
+                <span>SMART WATER MANAGEMENT</span>
+            </div>
+        </div>
+
+
+       <nav>
+
+    <button class="nav-item active" onclick="window.location.href='user-dashboard.html'">
+        <span>▣</span>
+        Dashboard
+    </button>
+
+    <button class="nav-item" onclick="window.location.href='user-water-usage.html'">
+        <span>💧</span>
+        Water Usage
+    </button>
+
+    <button class="nav-item" onclick="window.location.href='user-alerts.html'">
+        <span>⚠</span>
+        Alerts
+        <b>2</b>
+    </button>
+
+    <button class="nav-item" onclick="window.location.href='user-reports.html'">
+        <span>📊</span>
+        Reports
+    </button>
+
+    <button class="nav-item" onclick="window.location.href='user-settings.html'">
+        <span>⚙</span>
+        Settings
+    </button>
+
+</nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="support">
+                <span>?</span>
+
+                <div>
+                    <strong>Need Help?</strong>
+                    <small>Contact Aqua Guard</small>
+                </div>
+            </div>
+
+            <button class="logout-btn" onclick="goHome()">
+                ← Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <p class="welcome">GOOD AFTERNOON</p>
+                <h1>Welcome back, User 👋</h1>
+            </div>
+
+
+            <div class="top-actions">
+
+                <button class="notification" onclick="showAlerts()">
+                    🔔
+                    <span>2</span>
+                </button>
+
+                <div class="profile">
+
+                    <div class="avatar">
+                        U
+                    </div>
+
+                    <div>
+                        <strong>User Account</strong>
+                        <small>Household • AG-001</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- STATUS BANNER -->
+
+        <section class="status-banner">
+
+            <div class="status-left">
+
+                <div class="pulse-icon">
+                    💧
+                </div>
+
+                <div>
+                    <small>SYSTEM STATUS</small>
+                    <h3>Everything is running normally</h3>
+                </div>
+
+            </div>
+
+            <div class="system-live">
+                <span></span>
+                LIVE
+            </div>
+
+        </section>
+
+
+        <!-- STAT CARDS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-header">
+                    <span>TODAY'S USAGE</span>
+                    <div class="stat-icon blue">💧</div>
+                </div>
+
+                <h2>184 <small>L</small></h2>
+
+                <div class="stat-footer">
+                    <span>Daily limit: 250 L</span>
+                    <strong>73.6%</strong>
+                </div>
+
+                <div class="progress">
+                    <div style="width: 73.6%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-header">
+                    <span>REMAINING</span>
+                    <div class="stat-icon green">◉</div>
+                </div>
+
+                <h2>66 <small>L</small></h2>
+
+                <div class="stat-footer">
+                    <span>Available today</span>
+                    <strong class="green-text">Good</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-header">
+                    <span>FLOW RATE</span>
+                    <div class="stat-icon cyan">≈</div>
+                </div>
+
+                <h2>4.8 <small>L/min</small></h2>
+
+                <div class="stat-footer">
+                    <span>Current flow</span>
+                    <strong class="green-text">Normal</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-header">
+                    <span>BOREWELL</span>
+                    <div class="stat-icon purple">⚡</div>
+                </div>
+
+                <h2>Active</h2>
+
+                <div class="stat-footer">
+                    <span>Motor status</span>
+                    <strong class="green-text">● Running</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN GRID -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- CONSUMPTION CHART -->
+
+            <div class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <small>WATER CONSUMPTION</small>
+                        <h2>Weekly Overview</h2>
+                    </div>
+
+                    <select>
+                        <option>This Week</option>
+                        <option>Last Week</option>
+                        <option>This Month</option>
+                    </select>
+
+                </div>
+
+
+                <div class="big-chart">
+
+                    <div class="y-axis">
+                        <span>300L</span>
+                        <span>200L</span>
+                        <span>100L</span>
+                        <span>0L</span>
+                    </div>
+
+
+                    <div class="chart-area">
+
+                        <div class="grid-line line-1"></div>
+                        <div class="grid-line line-2"></div>
+                        <div class="grid-line line-3"></div>
+                        <div class="grid-line line-4"></div>
+
+
+                        <div class="bars">
+
+                            <div class="bar-group">
+                                <div class="bar" style="height: 48%"></div>
+                                <span>Mon</span>
+                            </div>
+
+                            <div class="bar-group">
+                                <div class="bar" style="height: 64%"></div>
+                                <span>Tue</span>
+                            </div>
+
+                            <div class="bar-group">
+                                <div class="bar" style="height: 53%"></div>
+                                <span>Wed</span>
+                            </div>
+
+                            <div class="bar-group">
+                                <div class="bar" style="height: 76%"></div>
+                                <span>Thu</span>
+                            </div>
+
+                            <div class="bar-group">
+                                <div class="bar" style="height: 61%"></div>
+                                <span>Fri</span>
+                            </div>
+
+                            <div class="bar-group">
+                                <div class="bar" style="height: 88%"></div>
+                                <span>Sat</span>
+                            </div>
+
+                            <div class="bar-group">
+                                <div class="bar today" style="height: 69%"></div>
+                                <span>Sun</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DAILY LIMIT -->
+
+            <div class="panel limit-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <small>DAILY LIMIT</small>
+                        <h2>Water Budget</h2>
+                    </div>
+                </div>
+
+
+                <div class="circle-wrapper">
+
+                    <div class="circle">
+
+                        <div>
+                            <strong>73.6%</strong>
+                            <span>USED</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="limit-info">
+
+                    <div>
+                        <span>Used</span>
+                        <strong>184 L</strong>
+                    </div>
+
+                    <div>
+                        <span>Limit</span>
+                        <strong>250 L</strong>
+                    </div>
+
+                    <div>
+                        <span>Remaining</span>
+                        <strong class="blue-text">66 L</strong>
+                    </div>
+
+                </div>
+
+
+                <button class="request-btn" onclick="requestWater()">
+                    + Request Additional Water
+                </button>
+
+            </div>
+
+
+            <!-- RECENT ACTIVITY -->
+
+            <div class="panel activity-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <small>RECENT ACTIVITY</small>
+                        <h2>Water Activity</h2>
+                    </div>
+
+                    <button class="view-btn">
+                        View All
+                    </button>
+
+                </div>
+
+
+                <div class="activity-list">
+
+                    <div class="activity">
+
+                        <div class="activity-icon">💧</div>
+
+                        <div>
+                            <strong>Water consumption detected</strong>
+                            <small>12.4 L • Kitchen supply</small>
+                        </div>
+
+                        <span>2 min ago</span>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-icon">⚡</div>
+
+                        <div>
+                            <strong>Borewell motor started</strong>
+                            <small>Automatic system control</small>
+                        </div>
+
+                        <span>18 min ago</span>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-icon">✓</div>
+
+                        <div>
+                            <strong>Daily monitoring active</strong>
+                            <small>System operating normally</small>
+                        </div>
+
+                        <span>1 hr ago</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALERTS -->
+
+            <div class="panel alerts-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <small>MONITORING</small>
+                        <h2>Alerts</h2>
+                    </div>
+
+                    <span class="alert-count">2 Active</span>
+
+                </div>
+
+
+                <div class="alert">
+
+                    <div class="alert-symbol">!</div>
+
+                    <div>
+                        <strong>Higher usage detected</strong>
+                        <p>Usage was above your usual level this afternoon.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="alert normal-alert">
+
+                    <div class="alert-symbol">✓</div>
+
+                    <div>
+                        <strong>System check complete</strong>
+                        <p>All sensors are communicating normally.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>© 2026 Aqua Guard</span>
+
+            <span>
+                Last updated: <b id="lastUpdated">Just now</b>
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="user-dashboard.js"></script>
+
+</body>
+
+</html>

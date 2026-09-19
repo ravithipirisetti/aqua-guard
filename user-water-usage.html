@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Water Usage</title>
+
+    <link rel="stylesheet" href="user-water-usage.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">💧</div>
+
+            <div>
+                <h2>AQUA GUARD</h2>
+                <span>SMART WATER MANAGEMENT</span>
+            </div>
+        </div>
+
+
+        <nav>
+
+            <button class="nav-item" onclick="window.location.href='user-dashboard.html'">
+                <span>▣</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item active">
+                <span>💧</span>
+                Water Usage
+            </button>
+
+            <button class="nav-item" onclick="window.location.href='user-alerts.html'">
+                <span>⚠</span>
+                Alerts
+                <b>2</b>
+            </button>
+
+            <button class="nav-item" onclick="window.location.href='user-reports.html'">
+                <span>📊</span>
+                Reports
+            </button>
+
+            <button class="nav-item" onclick="window.location.href='user-settings.html'">
+                <span>⚙</span>
+                Settings
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="support">
+                <span>?</span>
+
+                <div>
+                    <strong>Need Help?</strong>
+                    <small>Contact Aqua Guard</small>
+                </div>
+            </div>
+
+            <button class="logout-btn" onclick="goHome()">
+                ← Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <p class="welcome">WATER MONITORING</p>
+                <h1>Water Usage</h1>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar">
+                    U
+                </div>
+
+                <div>
+                    <strong>User Account</strong>
+                    <small>Household • AG-001</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <span>TODAY'S USAGE</span>
+
+                <h2>184 <small>L</small></h2>
+
+                <p>Daily limit: 250 L</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>THIS WEEK</span>
+
+                <h2>1,286 <small>L</small></h2>
+
+                <p>Average: 183.7 L/day</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>THIS MONTH</span>
+
+                <h2>5,472 <small>L</small></h2>
+
+                <p>Current month</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>REMAINING TODAY</span>
+
+                <h2 class="blue-text">66 <small>L</small></h2>
+
+                <p>Available water budget</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- DAILY USAGE -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <small>DAILY CONSUMPTION</small>
+                    <h2>Today's Water Usage</h2>
+                </div>
+
+                <span class="live-badge">
+                    ● LIVE
+                </span>
+
+            </div>
+
+
+            <div class="usage-progress">
+
+                <div class="progress-info">
+
+                    <strong>184 L</strong>
+
+                    <span>of 250 L daily limit</span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div style="width: 73.6%"></div>
+
+                </div>
+
+                <div class="progress-footer">
+
+                    <span>73.6% used</span>
+
+                    <strong>66 L remaining</strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- WEEKLY USAGE -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <small>WEEKLY CONSUMPTION</small>
+                    <h2>Usage Overview</h2>
+                </div>
+
+                <select>
+                    <option>This Week</option>
+                    <option>Last Week</option>
+                </select>
+
+            </div>
+
+
+            <div class="chart">
+
+                <div class="chart-row">
+                    <span>Mon</span>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 62%"></div>
+                    </div>
+                    <strong>155 L</strong>
+                </div>
+
+                <div class="chart-row">
+                    <span>Tue</span>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 72%"></div>
+                    </div>
+                    <strong>180 L</strong>
+                </div>
+
+                <div class="chart-row">
+                    <span>Wed</span>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 58%"></div>
+                    </div>
+                    <strong>145 L</strong>
+                </div>
+
+                <div class="chart-row">
+                    <span>Thu</span>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 82%"></div>
+                    </div>
+                    <strong>205 L</strong>
+                </div>
+
+                <div class="chart-row">
+                    <span>Fri</span>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 68%"></div>
+                    </div>
+                    <strong>170 L</strong>
+                </div>
+
+                <div class="chart-row">
+                    <span>Sat</span>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 90%"></div>
+                    </div>
+                    <strong>225 L</strong>
+                </div>
+
+                <div class="chart-row today">
+                    <span>Sun</span>
+                    <div class="bar-container">
+                        <div class="bar" style="width: 74%"></div>
+                    </div>
+                    <strong>184 L</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- WATER SOURCES -->
+
+        <section class="bottom-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <small>WATER SOURCE</small>
+                        <h2>Borewell Activity</h2>
+                    </div>
+                </div>
+
+                <div class="source-status">
+
+                    <div class="source-icon">⚡</div>
+
+                    <div>
+                        <strong>Borewell Motor Active</strong>
+                        <span>Automatic system control</span>
+                    </div>
+
+                    <b>RUNNING</b>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <small>CONSUMPTION STATUS</small>
+                        <h2>Daily Limit</h2>
+                    </div>
+                </div>
+
+                <div class="limit-status">
+
+                    <div class="limit-circle">
+                        73.6%
+                    </div>
+
+                    <div>
+                        <strong>Within Limit</strong>
+                        <span>66 L remaining today</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <span>© 2026 Aqua Guard</span>
+
+            <span>
+                Last updated:
+                <b id="lastUpdated">Just now</b>
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="user-water-usage.js"></script>
+
+</body>
+
+</html>

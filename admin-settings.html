@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Admin Settings</title>
+
+    <link rel="stylesheet" href="admin-settings.css">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">💧</div>
+
+                <div>
+                    <h2>AQUA GUARD</h2>
+                    <span>ADMIN PORTAL</span>
+                </div>
+            </div>
+
+
+            <nav class="nav-menu">
+
+                <a href="admin-dashboard.html" class="nav-item">
+                    <span>▣</span>
+                    Dashboard
+                </a>
+
+                <a href="admin-households.html" class="nav-item">
+                    <span>⌂</span>
+                    Households
+                </a>
+
+                <a href="admin-water-usage.html" class="nav-item">
+                    <span>◉</span>
+                    Water Usage
+                </a>
+
+                <a href="admin-alerts.html" class="nav-item">
+                    <span>⚠</span>
+                    Alerts
+                    <b>3</b>
+                </a>
+
+                <a href="admin-reports.html" class="nav-item">
+                    <span>▤</span>
+                    Reports
+                </a>
+
+                <a href="admin-settings.html" class="nav-item active">
+                    <span>⚙</span>
+                    Settings
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button onclick="logoutAdmin()" class="logout-btn">
+                    ↪ Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div>
+                    <span class="page-label">ADMIN CONTROL CENTER</span>
+                    <h1>Settings</h1>
+                </div>
+
+                <div class="admin-profile">
+
+                    <div class="profile-avatar">A</div>
+
+                    <div>
+                        <strong id="adminName">Administrator</strong>
+                        <span>System Administrator</span>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <section class="settings-container">
+
+
+                <!-- ADMIN PROFILE -->
+                <div class="settings-card">
+
+                    <div class="card-heading">
+                        <div class="heading-icon">👤</div>
+
+                        <div>
+                            <h2>Administrator Profile</h2>
+                            <p>Manage administrator account information.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>ADMIN NAME</label>
+                            <input
+                                type="text"
+                                id="adminFullName"
+                                value="Administrator"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>EMAIL ADDRESS</label>
+                            <input
+                                type="email"
+                                id="adminEmail"
+                                value="admin@aquaguard.com"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WATER SETTINGS -->
+                <div class="settings-card">
+
+                    <div class="card-heading">
+                        <div class="heading-icon">💧</div>
+
+                        <div>
+                            <h2>Water Management</h2>
+                            <p>Configure community water monitoring settings.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>DEFAULT DAILY WATER LIMIT</label>
+
+                            <div class="input-with-unit">
+
+                                <input
+                                    type="number"
+                                    id="waterLimit"
+                                    value="250"
+                                    min="1"
+                                >
+
+                                <span>L</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>OVER-USAGE ALERT THRESHOLD</label>
+
+                            <div class="input-with-unit">
+
+                                <input
+                                    type="number"
+                                    id="alertThreshold"
+                                    value="100"
+                                    min="1"
+                                >
+
+                                <span>%</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERT SETTINGS -->
+                <div class="settings-card">
+
+                    <div class="card-heading">
+                        <div class="heading-icon">🔔</div>
+
+                        <div>
+                            <h2>Alert Preferences</h2>
+                            <p>Choose which system notifications are enabled.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>High Usage Alerts</strong>
+                            <span>Notify administrators when household usage exceeds the limit.</span>
+                        </div>
+
+                        <label class="switch">
+                            <input type="checkbox" id="highUsageAlerts" checked>
+                            <span class="slider"></span>
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>System Alerts</strong>
+                            <span>Notify administrators about sensor and system issues.</span>
+                        </div>
+
+                        <label class="switch">
+                            <input type="checkbox" id="systemAlerts" checked>
+                            <span class="slider"></span>
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>Daily Reports</strong>
+                            <span>Enable automatic daily water consumption reports.</span>
+                        </div>
+
+                        <label class="switch">
+                            <input type="checkbox" id="dailyReports" checked>
+                            <span class="slider"></span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECURITY -->
+                <div class="settings-card">
+
+                    <div class="card-heading">
+                        <div class="heading-icon">🔐</div>
+
+                        <div>
+                            <h2>Security</h2>
+                            <p>Administrator security information.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="security-status">
+
+                        <div class="security-icon">✓</div>
+
+                        <div>
+                            <strong>Administrator Access Protected</strong>
+                            <span>
+                                Your Aqua Guard administrator account is protected.
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SAVE BUTTON -->
+                <div class="settings-actions">
+
+                    <button
+                        class="save-btn"
+                        onclick="saveSettings()"
+                    >
+                        Save Settings
+                    </button>
+
+                </div>
+
+
+            </section>
+
+
+            <footer>
+                Aqua Guard Admin Portal • Demo Prototype
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="admin-settings.js"></script>
+
+</body>
+
+</html>

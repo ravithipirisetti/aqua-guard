@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Admin Login</title>
+
+    <link rel="stylesheet" href="admin-login.css">
+</head>
+
+<body>
+
+    <div class="admin-login-page">
+
+        <div class="admin-login-card">
+
+            <div class="admin-icon">
+                🛡️
+            </div>
+
+            <div class="admin-brand">
+                <h1>AQUA GUARD</h1>
+                <span>ADMIN PORTAL</span>
+            </div>
+
+            <div class="admin-heading">
+                <span>AUTHORIZED ACCESS</span>
+                <h2>Admin Sign In</h2>
+                <p>
+                    Sign in to manage households, monitor water usage,
+                    alerts and system activity.
+                </p>
+            </div>
+
+            <form onsubmit="adminLogin(event)">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Enter admin email"
+                    required
+                >
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter password"
+                    required
+                >
+
+                <button type="submit" class="admin-login-btn">
+                    Sign In
+                    <span>→</span>
+                </button>
+
+            </form>
+
+            <button class="back-button" onclick="goToUserLogin()">
+                ← Back to User Login
+            </button>
+
+            <div class="admin-security">
+                🔒 Secure Administrator Access
+            </div>
+
+            <p class="demo-note">
+                Demo prototype • Aqua Guard
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="admin-login.js"></script>
+
+</body>
+
+</html>

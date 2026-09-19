@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | User Settings</title>
+
+    <link rel="stylesheet" href="user-settings.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">💧</div>
+
+            <div>
+                <h1>AQUA GUARD</h1>
+                <span>SMART WATER MANAGEMENT</span>
+            </div>
+        </div>
+
+
+        <nav>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-dashboard.html'">
+                <span>▣</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-water-usage.html'">
+                <span>💧</span>
+                Water Usage
+            </button>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-alerts.html'">
+                <span>⚠</span>
+                Alerts
+                <b>2</b>
+            </button>
+
+            <button class="nav-item"
+                onclick="window.location.href='user-reports.html'">
+                <span>📊</span>
+                Reports
+            </button>
+
+            <button class="nav-item active">
+                <span>⚙</span>
+                Settings
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button class="support-btn" onclick="showSupport()">
+                <span>?</span>
+                Support
+            </button>
+
+            <button class="logout-btn" onclick="logoutUser()">
+                <span>↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <span class="eyebrow">ACCOUNT MANAGEMENT</span>
+
+                <h2>Settings</h2>
+
+                <p>
+                    Manage your Aqua Guard household preferences
+                </p>
+            </div>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    👤
+                </div>
+
+                <div>
+                    <strong id="userName">
+                        User Account
+                    </strong>
+
+                    <span>
+                        Household • AG-001
+                    </span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <section class="settings-content">
+
+
+            <!-- ACCOUNT -->
+            <div class="settings-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        👤
+                    </div>
+
+                    <div>
+                        <h3>Account Information</h3>
+
+                        <p>
+                            Your Aqua Guard account details
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Email Address</label>
+
+                        <input
+                            type="email"
+                            id="userEmail"
+                            placeholder="Enter email address">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Household ID</label>
+
+                        <input
+                            type="text"
+                            value="AG-001"
+                            disabled>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- WATER SETTINGS -->
+            <div class="settings-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        💧
+                    </div>
+
+                    <div>
+                        <h3>Water Management</h3>
+
+                        <p>
+                            Configure your household water preferences
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Daily Water Limit</label>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="waterLimit"
+                                value="250"
+                                min="1">
+
+                            <span>L / day</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Water Source</label>
+
+                        <select id="waterSource">
+
+                            <option value="borewell">
+                                Borewell
+                            </option>
+
+                            <option value="municipal">
+                                Municipal Supply
+                            </option>
+
+                            <option value="both">
+                                Borewell + Municipal
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICATIONS -->
+            <div class="settings-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        🔔
+                    </div>
+
+                    <div>
+                        <h3>Notifications</h3>
+
+                        <p>
+                            Choose which alerts you want to receive
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="toggle-list">
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>Water Usage Alerts</strong>
+
+                            <p>
+                                Get notified when your water usage is high.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="usageAlerts"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>Daily Limit Alerts</strong>
+
+                            <p>
+                                Receive alerts when approaching your daily limit.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="limitAlerts"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>System Notifications</strong>
+
+                            <p>
+                                Receive important Aqua Guard system updates.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="systemAlerts"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY -->
+            <div class="settings-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        🔒
+                    </div>
+
+                    <div>
+                        <h3>Account Security</h3>
+
+                        <p>
+                            Security information for your account
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="security-status">
+
+                    <div class="security-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>Account Secure</strong>
+
+                        <p>
+                            Your Aqua Guard account is protected.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAVE -->
+            <div class="settings-actions">
+
+                <button
+                    class="save-btn"
+                    onclick="saveSettings()">
+
+                    💾 Save Settings
+
+                </button>
+
+                <button
+                    class="cancel-btn"
+                    onclick="loadSettings()">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+
+            <div class="demo-note">
+                Aqua Guard • Smart Water Management System • Demo Prototype
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="user-settings.js"></script>
+
+</body>
+</html>

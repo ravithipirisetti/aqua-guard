@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Alerts</title>
+
+    <link rel="stylesheet" href="admin-alerts.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <header class="page-header">
+
+            <div>
+                <span>ADMIN CONTROL CENTER</span>
+                <h1>Alerts & Notifications</h1>
+                <p>Monitor unusual water usage and important system events.</p>
+            </div>
+
+            <button onclick="goBackToDashboard()" class="back-btn">
+                ← Dashboard
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+                <span>ACTIVE ALERTS</span>
+                <strong>3</strong>
+                <small>Require attention</small>
+            </div>
+
+            <div class="summary-card">
+                <span>HIGH USAGE</span>
+                <strong>2</strong>
+                <small>Households over limit</small>
+            </div>
+
+            <div class="summary-card">
+                <span>SYSTEM ALERTS</span>
+                <strong>1</strong>
+                <small>Requires monitoring</small>
+            </div>
+
+            <div class="summary-card">
+                <span>RESOLVED TODAY</span>
+                <strong>5</strong>
+                <small>Alerts handled</small>
+            </div>
+
+        </section>
+
+
+        <!-- ALERT LIST -->
+
+        <section class="alert-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <span>LIVE MONITORING</span>
+                    <h2>Active Alerts</h2>
+                </div>
+
+                <select id="alertFilter" onchange="filterAlerts()">
+                    <option value="all">All Alerts</option>
+                    <option value="high">High Usage</option>
+                    <option value="system">System</option>
+                </select>
+
+            </div>
+
+
+            <div id="alertList">
+
+
+                <!-- ALERT 1 -->
+
+                <div class="alert-item high" data-type="high">
+
+                    <div class="alert-icon">
+                        ⚠
+                    </div>
+
+                    <div class="alert-content">
+
+                        <div class="alert-title">
+                            <h3>Daily Water Limit Exceeded</h3>
+                            <span class="priority high-priority">HIGH</span>
+                        </div>
+
+                        <p>
+                            Household <strong>AG-002</strong>
+                            has consumed 267 L against a daily limit of 250 L.
+                        </p>
+
+                        <small>
+                            Green Residency • Today, 2:35 PM
+                        </small>
+
+                    </div>
+
+                    <button onclick="resolveAlert(this)" class="resolve-btn">
+                        Resolve
+                    </button>
+
+                </div>
+
+
+                <!-- ALERT 2 -->
+
+                <div class="alert-item high" data-type="high">
+
+                    <div class="alert-icon">
+                        ⚠
+                    </div>
+
+                    <div class="alert-content">
+
+                        <div class="alert-title">
+                            <h3>Unusual Water Consumption</h3>
+                            <span class="priority high-priority">HIGH</span>
+                        </div>
+
+                        <p>
+                            Household <strong>AG-004</strong>
+                            has exceeded its expected daily consumption.
+                        </p>
+
+                        <small>
+                            Sunrise Apartments • Today, 1:48 PM
+                        </small>
+
+                    </div>
+
+                    <button onclick="resolveAlert(this)" class="resolve-btn">
+                        Resolve
+                    </button>
+
+                </div>
+
+
+                <!-- ALERT 3 -->
+
+                <div class="alert-item system" data-type="system">
+
+                    <div class="alert-icon system-icon">
+                        ℹ
+                    </div>
+
+                    <div class="alert-content">
+
+                        <div class="alert-title">
+                            <h3>Sensor Communication Check</h3>
+                            <span class="priority system-priority">SYSTEM</span>
+                        </div>
+
+                        <p>
+                            One water flow sensor temporarily stopped reporting data.
+                        </p>
+
+                        <small>
+                            AG-007 • Today, 12:20 PM
+                        </small>
+
+                    </div>
+
+                    <button onclick="resolveAlert(this)" class="resolve-btn">
+                        Resolve
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT ALERTS -->
+
+        <section class="alert-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <span>ALERT HISTORY</span>
+                    <h2>Recently Resolved</h2>
+                </div>
+
+            </div>
+
+            <div class="resolved-list">
+
+                <div class="resolved-item">
+                    <span>✓</span>
+                    <div>
+                        <strong>High water usage detected</strong>
+                        <small>AG-005 • Resolved today</small>
+                    </div>
+                </div>
+
+                <div class="resolved-item">
+                    <span>✓</span>
+                    <div>
+                        <strong>Flow sensor restored</strong>
+                        <small>AG-009 • Resolved today</small>
+                    </div>
+                </div>
+
+                <div class="resolved-item">
+                    <span>✓</span>
+                    <div>
+                        <strong>Daily limit alert</strong>
+                        <small>AG-011 • Resolved today</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            Aqua Guard Admin Portal • Demo Prototype
+        </footer>
+
+    </div>
+
+
+    <script src="admin-alerts.js"></script>
+
+</body>
+
+</html>

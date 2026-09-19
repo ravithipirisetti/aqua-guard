@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Confirm Household</title>
+
+    <link rel="stylesheet" href="household-confirm.css">
+</head>
+
+<body>
+
+    <div class="confirm-page">
+
+        <div class="confirm-card">
+
+            <div class="confirm-icon">
+                💧
+            </div>
+
+            <div class="brand-text">
+                <h1>AQUA GUARD</h1>
+                <span>SMART WATER MANAGEMENT</span>
+            </div>
+
+            <div class="confirm-heading">
+                <span class="step-label">ACCOUNT VERIFIED</span>
+
+                <h2>Confirm Your Household</h2>
+
+                <p>
+                    Please verify that the household information below
+                    belongs to you before accessing your water dashboard.
+                </p>
+            </div>
+
+            <div class="household-box">
+
+                <div class="household-header">
+                    <div>
+                        <span>HOUSEHOLD</span>
+                        <h3>AG-001</h3>
+                    </div>
+
+                    <div class="verified">
+                        ✓ VERIFIED
+                    </div>
+                </div>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <span>HOUSEHOLD NAME</span>
+                        <strong>Demo Residence</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>LOCATION</span>
+                        <strong>Residential Community</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>DAILY WATER LIMIT</span>
+                        <strong>250 L</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>WATER SOURCE</span>
+                        <strong>Borewell</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="info-message">
+                <span>ℹ</span>
+
+                <p>
+                    Aqua Guard will use this household profile to monitor
+                    water consumption and generate your reports.
+                </p>
+            </div>
+
+            <button
+                class="confirm-button"
+                onclick="confirmHousehold()"
+            >
+                Confirm & Continue
+                <span>→</span>
+            </button>
+
+            <button
+                class="back-button"
+                onclick="goBack()"
+            >
+                ← Back to Login
+            </button>
+
+            <p class="demo-note">
+                Demo prototype • Aqua Guard
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="household-confirm.js"></script>
+
+</body>
+
+</html>

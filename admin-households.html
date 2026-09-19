@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | </title>
+
+    <link rel="stylesheet" href="admin-households.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <header class="page-header">
+
+            <div>
+                <span>ADMIN CONTROL CENTER</span>
+                <h1>Household Management</h1>
+                <p>Monitor registered  and their current water status.</p>
+            </div>
+
+            <button onclick="goBackToDashboard()" class="back-btn">
+                ← Dashboard
+            </button>
+
+        </header>
+
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+                <span>TOTAL </span>
+                <strong>24</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>WITHIN LIMIT</span>
+                <strong>21</strong>
+            </div>
+
+            <div class="summary-card warning-card">
+                <span>OVER LIMIT</span>
+                <strong>3</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>ACTIVE BOREWELLS</span>
+                <strong>8</strong>
+            </div>
+
+        </section>
+
+
+        <section class="household-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <span>REGISTERED </span>
+                    <h2>Water Usage Status</h2>
+                </div>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search household..."
+                    onkeyup="search()"
+                >
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table id="householdTable">
+
+                    <thead>
+
+                        <tr>
+                            <th>Household</th>
+                            <th>Name</th>
+                            <th>Daily Limit</th>
+                            <th>Today's Usage</th>
+                            <th>Borewell</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td><strong>AG-001</strong></td>
+                            <td>Demo Residence</td>
+                            <td>250 L</td>
+                            <td>184 L</td>
+                            <td><span class="motor active">Running</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>AG-002</strong></td>
+                            <td>Green Residency</td>
+                            <td>250 L</td>
+                            <td>267 L</td>
+                            <td><span class="motor">Stopped</span></td>
+                            <td><span class="status warning">Over Limit</span></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>AG-003</strong></td>
+                            <td>Lake View Homes</td>
+                            <td>200 L</td>
+                            <td>143 L</td>
+                            <td><span class="motor active">Running</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>AG-004</strong></td>
+                            <td>Sunrise Apartments</td>
+                            <td>300 L</td>
+                            <td>312 L</td>
+                            <td><span class="motor">Stopped</span></td>
+                            <td><span class="status warning">Over Limit</span></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>AG-005</strong></td>
+                            <td>Green Valley Home</td>
+                            <td>250 L</td>
+                            <td>198 L</td>
+                            <td><span class="motor active">Running</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>AG-006</strong></td>
+                            <td>River View Residency</td>
+                            <td>250 L</td>
+                            <td>221 L</td>
+                            <td><span class="motor">Stopped</span></td>
+                            <td><span class="status normal">Normal</span></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            Aqua Guard Admin Portal • Demo Prototype
+        </footer>
+
+    </div>
+
+
+    <script src="admin-households.js"></script>
+</body>
+
+</html>
