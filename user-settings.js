@@ -1,96 +1,56 @@
-// =====================================
-// AQUA GUARD - USER SETTINGS
-// =====================================
-
-
 function loadSettings() {
 
-    const email =
-        localStorage.getItem("userEmail");
+    const email = localStorage.getItem("userEmail");
+    const savedLimit = localStorage.getItem("userWaterLimit");
+    const savedSource = localStorage.getItem("userWaterSource");
 
-    const savedLimit =
-        localStorage.getItem("userWaterLimit");
+    const usageAlerts = localStorage.getItem("userUsageAlerts");
+    const limitAlerts = localStorage.getItem("userLimitAlerts");
+    const systemAlerts = localStorage.getItem("userSystemAlerts");
 
-    const savedSource =
-        localStorage.getItem("userWaterSource");
-
-    const usageAlerts =
-        localStorage.getItem("userUsageAlerts");
-
-    const limitAlerts =
-        localStorage.getItem("userLimitAlerts");
-
-    const systemAlerts =
-        localStorage.getItem("userSystemAlerts");
-
-
-    // EMAIL
-
-    const emailInput =
-        document.getElementById("userEmail");
+    // Email
+    const emailInput = document.getElementById("userEmail");
 
     if (email && emailInput) {
         emailInput.value = email;
     }
 
+    // Water limit
+    const waterLimit = document.getElementById("waterLimit");
 
-    // WATER LIMIT
-
-    if (savedLimit) {
-
-        document.getElementById("waterLimit").value =
-            savedLimit;
-
+    if (savedLimit && waterLimit) {
+        waterLimit.value = savedLimit;
     }
 
+    // Water source
+    const waterSource = document.getElementById("waterSource");
 
-    // WATER SOURCE
-
-    if (savedSource) {
-
-        document.getElementById("waterSource").value =
-            savedSource;
-
+    if (savedSource && waterSource) {
+        waterSource.value = savedSource;
     }
 
-
-    // NOTIFICATIONS
-
+    // Notifications
     if (usageAlerts !== null) {
-
         document.getElementById("usageAlerts").checked =
             usageAlerts === "true";
-
     }
 
     if (limitAlerts !== null) {
-
         document.getElementById("limitAlerts").checked =
             limitAlerts === "true";
-
     }
 
     if (systemAlerts !== null) {
-
         document.getElementById("systemAlerts").checked =
             systemAlerts === "true";
-
     }
-
 }
 
-
-// =====================================
-// SAVE SETTINGS
-// =====================================
 
 function saveSettings() {
 
     const email =
         document.getElementById("userEmail").value.trim();
-
-    const waterLimit =
-        document.getElementById("waterLimit").value;
 
     const waterSource =
         document.getElementById("waterSource").value;
@@ -104,23 +64,8 @@ function saveSettings() {
     }
 
 
-    if (waterLimit === "" || Number(waterLimit) <= 0) {
-
-        alert("Please enter a valid daily water limit.");
-
-        return;
-    }
-
-
-    localStorage.setItem(
-        "userEmail",
-        email
-    );
-
-    localStorage.setItem(
-        "userWaterLimit",
-        waterLimit
-    );
+    // Save user information
+    localStorage.setItem("userEmail", email);
 
     localStorage.setItem(
         "userWaterSource",
@@ -128,6 +73,7 @@ function saveSettings() {
     );
 
 
+    // Save notification preferences
     localStorage.setItem(
         "userUsageAlerts",
         document.getElementById("usageAlerts").checked
@@ -148,13 +94,8 @@ function saveSettings() {
         "Settings Saved ✓\n\n" +
         "Your Aqua Guard settings have been saved successfully."
     );
-
 }
 
-
-// =====================================
-// SUPPORT
-// =====================================
 
 function showSupport() {
 
@@ -166,33 +107,69 @@ function showSupport() {
         "• Generate Reports\n" +
         "• Contact the administrator for additional water requests"
     );
-
 }
 
-
-// =====================================
-// LOGOUT
-// =====================================
 
 function logoutUser() {
 
     const confirmed =
-        confirm(
-            "Logout\n\n" +
-            "Are you sure you want to logout?"
-        );
+        confirm("Logout\n\nAre you sure you want to logout?");
 
     if (confirmed) {
-
         window.location.href = "index.html";
-
     }
-
 }
 
 
-// =====================================
-// LOAD SETTINGS
-// =====================================
-
+// Load saved settings when page opens
 loadSettings();
+
+function submitLimitRequest() {
+
+    const requestedLimit =
+        document.getElementById("requestedLimit").value;
+
+    const reason =
+        document.getElementById("extensionReason").value.trim();
+
+    const email =
+        localStorage.getItem("userEmail") || "Unknown User";
+
+    if (requestedLimit === "") {
+        alert("Please enter the requested water limit.");
+        return;
+    }
+
+    if (reason === "") {
+        alert("Please enter a reason for the request.");
+        return;
+    }
+
+    const currentLimit =
+        localStorage.getItem("userWaterLimit") || "250";
+
+    const request = {
+        id: Date.now(),
+        household: "AG-001",
+        email: email,
+        currentLimit: Number(currentLimit),
+        requestedLimit: Number(requestedLimit),
+        reason: reason,
+        date: new Date().toLocaleString(),
+        status: "Pending"
+    };
+
+    localStorage.setItem(
+        "waterLimitRequest",
+        JSON.stringify(request)
+    );
+
+    document.getElementById("requestStatus").textContent =
+        "Extension request submitted. Waiting for administrator approval.";
+
+    alert(
+        "Water Limit Extension Request Submitted ✓\n\n" +
+        "Requested Limit: " + requestedLimit + " L\n" +
+        "Status: Pending"
+    );
+}
