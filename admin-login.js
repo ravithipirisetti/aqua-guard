@@ -22,15 +22,7 @@ function adminLogin(event) {
 
     } else {
 
-        alert(
-            "Invalid admin login details.\n\n" +
-            "Demo accounts:\n\n" +
-            "anish@aquaguard.com\n" +
-            "rithwika@aquaguard.com\n" +
-            "lasya@aquaguard.com\n\n" +
-            "Password: 9963"
-        );
-    }
+      alert("Invalid admin login details.");
 }
 
 
