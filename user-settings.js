@@ -1,357 +1,283 @@
-function loadSettings() {
+// =====================================
+// AQUA GUARD - ADMIN WATER REQUESTS
+// =====================================
 
-    const email = localStorage.getItem("userEmail");
-    const savedLimit = localStorage.getItem("userWaterLimit");
-    const savedSource = localStorage.getItem("userWaterSource");
+function loadRequests() {
 
-    const usageAlerts = localStorage.getItem("userUsageAlerts");
-    const limitAlerts = localStorage.getItem("userLimitAlerts");
-    const systemAlerts = localStorage.getItem("userSystemAlerts");
+    const container =
+        document.getElementById("requestContainer");
 
-    // Email
-    const emailInput = document.getElementById("userEmail");
-
-    if (email && emailInput) {
-        emailInput.value = email;
-    }
-
-    // Water limit
-    const waterLimit = document.getElementById("waterLimit");
-
-    if (savedLimit && waterLimit) {
-        waterLimit.value = savedLimit;
-    }
-
-    // Water source
-    const waterSource = document.getElementById("waterSource");
-
-    if (savedSource && waterSource) {
-        waterSource.value = savedSource;
-    }
-
-    // Notifications
-    if (usageAlerts !== null) {
-        document.getElementById("usageAlerts").checked =
-            usageAlerts === "true";
-    }
-
-    if (limitAlerts !== null) {
-        document.getElementById("limitAlerts").checked =
-            limitAlerts === "true";
-    }
-
-    if (systemAlerts !== null) {
-        document.getElementById("systemAlerts").checked =
-            systemAlerts === "true";
-    }
-}
-
-
-function saveSettings() {
-
-    const email =
-        document.getElementById("userEmail").value.trim();
-
-    const waterSource =
-        document.getElementById("waterSource").value;
-
-
-    if (email === "") {
-
-        alert("Please enter your email address.");
-
-        return;
-    }
-
-
-    // Save user information
-    localStorage.setItem("userEmail", email);
-
-    localStorage.setItem(
-        "userWaterSource",
-        waterSource
-    );
-
-
-    // Save notification preferences
-    localStorage.setItem(
-        "userUsageAlerts",
-        document.getElementById("usageAlerts").checked
-    );
-
-    localStorage.setItem(
-        "userLimitAlerts",
-        document.getElementById("limitAlerts").checked
-    );
-
-    localStorage.setItem(
-        "userSystemAlerts",
-        document.getElementById("systemAlerts").checked
-    );
-
-
-    alert(
-        "Settings Saved ✓\n\n" +
-        "Your Aqua Guard settings have been saved successfully."
-    );
-}
-
-
-function showSupport() {
-
-    alert(
-        "Aqua Guard Support\n\n" +
-        "For this demo prototype:\n\n" +
-        "• Check Water Usage\n" +
-        "• Review Alerts\n" +
-        "• Generate Reports\n" +
-        "• Contact the administrator for additional water requests"
-    );
-}
-
-
-function logoutUser() {
-
-    const confirmed =
-        confirm("Logout\n\nAre you sure you want to logout?");
-
-    if (confirmed) {
-        window.location.href = "index.html";
-    }
-}
-
-
-// Load saved settings when page opens
-loadSettings();
-
-function submitLimitRequest() {
-
-    const requestedLimit =
-        document.getElementById("requestedLimit").value;
-
-    const reason =
-        document.getElementById("extensionReason").value.trim();
-
-    const email =
-        localStorage.getItem("userEmail") || "Unknown User";
-
-
-    // Validate requested limit
-    if (requestedLimit === "") {
-
-        alert("Please enter the requested water limit.");
-
-        return;
-    }
-
-
-    // Validate reason
-    if (reason === "") {
-
-        alert("Please enter a reason for the request.");
-
-        return;
-    }
-
-
-    // =====================================
-    // CURRENT WATER LIMIT
-    // =====================================
-
-    const currentLimit =
-        Number(
-            localStorage.getItem("userWaterLimit")
-        ) || 250;
-
-
-    // =====================================
-    // CREATE REQUEST
-    // =====================================
-
-    const now = new Date();
-
-    const request = {
-
-        household: "AG-001",
-
-        email: email,
-
-        currentLimit: currentLimit,
-
-        requestedLimit:
-            Number(requestedLimit),
-
-        reason: reason,
-
-        date:
-            now.toLocaleString(),
-
-        timestamp:
-            now.toISOString(),
-
-        status: "Pending"
-
-    };
-
-
-    // =====================================
-    // SAVE TO FIREBASE
-    // =====================================
+    const count =
+        document.getElementById("requestCount");
 
     database
         .ref("waterLimitRequests")
-        .push(request)
+        .on("value", function(snapshot) {
 
-        .then(function () {
+            const data = snapshot.val();
 
-            // Also keep a local copy
-            let requests = [];
+            if (!data) {
 
-            const savedRequests =
-                localStorage.getItem("waterLimitRequests");
+                count.textContent = "0";
 
+                container.innerHTML = `
+                    <div class="no-request">
+                        <h3>No pending applications</h3>
+                        <p>
+                            Water limit extension requests from
+                            households will appear here.
+                        </p>
+                    </div>
+                `;
 
-            if (savedRequests) {
-
-                try {
-
-                    requests =
-                        JSON.parse(savedRequests);
-
-                } catch (error) {
-
-                    requests = [];
-
-                }
-
+                return;
             }
 
+            const requests =
+                Object.entries(data).map(function(entry) {
 
-            request.id = Date.now();
+                    return {
+                        id: entry[0],
+                        ...entry[1]
+                    };
 
+                });
 
-            requests.push(request);
+            const pendingRequests =
+                requests.filter(function(request) {
 
+                    return request.status === "Pending";
 
-            localStorage.setItem(
-                "waterLimitRequests",
-                JSON.stringify(requests)
-            );
+                });
 
+            count.textContent =
+                pendingRequests.length;
 
-            // =====================================
-            // SHOW STATUS
-            // =====================================
+            if (pendingRequests.length === 0) {
 
-            const status =
-                document.getElementById("requestStatus");
+                container.innerHTML = `
+                    <div class="no-request">
+                        <h3>No pending applications</h3>
+                        <p>
+                            There are no requests waiting for approval.
+                        </p>
+                    </div>
+                `;
 
-
-            if (status) {
-
-                status.textContent =
-                    "Extension request submitted. Waiting for administrator approval.";
-
+                return;
             }
 
+            container.innerHTML =
+                pendingRequests.map(function(request) {
 
-            // =====================================
-            // SUCCESS MESSAGE
-            // =====================================
+                    return `
+                        <div class="request">
 
-            alert(
+                            <div class="request-top">
 
-                "Water Limit Extension Request Submitted ✓\n\n" +
+                                <div>
+                                    <h3>${request.household}</h3>
+                                    <p>${request.email}</p>
+                                </div>
 
-                "Requested Limit: " +
-                requestedLimit +
-                " L\n\n" +
+                                <span class="pending">
+                                    ${request.status}
+                                </span>
 
-                "Status: Pending"
+                            </div>
 
-            );
+                            <div class="details">
+
+                                <div class="detail">
+                                    <span>Current Limit</span>
+                                    <strong>
+                                        ${request.currentLimit} L
+                                    </strong>
+                                </div>
+
+                                <div class="detail">
+                                    <span>Requested Limit</span>
+                                    <strong>
+                                        ${request.requestedLimit} L
+                                    </strong>
+                                </div>
+
+                                <div class="detail">
+                                    <span>Application Date</span>
+                                    <strong>
+                                        ${request.date}
+                                    </strong>
+                                </div>
+
+                                <div class="detail">
+                                    <span>Household</span>
+                                    <strong>
+                                        ${request.household}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                            <div class="reason">
+                                <span>REASON</span>
+                                <p>${request.reason}</p>
+                            </div>
+
+                            <div class="actions">
+
+                                <button
+                                    class="approve"
+                                    onclick="approveRequest('${request.id}')">
+                                    ✓ Approve Request
+                                </button>
+
+                                <button
+                                    class="reject"
+                                    onclick="rejectRequest('${request.id}')">
+                                    ✕ Reject Request
+                                </button>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }).join("");
 
         })
-
-        .catch(function (error) {
+        .catch(function(error) {
 
             console.error(
-                "Firebase request error:",
+                "Firebase request loading error:",
                 error
             );
 
+        });
+}
+
+
+// =====================================
+// APPROVE REQUEST
+// =====================================
+
+function approveRequest(requestId) {
+
+    const requestRef =
+        database
+            .ref("waterLimitRequests")
+            .child(requestId);
+
+    requestRef.once("value")
+        .then(function(snapshot) {
+
+            const request = snapshot.val();
+
+            if (!request) {
+
+                alert("Request not found.");
+                return;
+
+            }
+
+            return database
+                .ref("households")
+                .child(request.household)
+                .update({
+                    waterLimit:
+                        Number(request.requestedLimit)
+                })
+                .then(function() {
+
+                    return requestRef.update({
+
+                        status: "Approved",
+
+                        approvedDate:
+                            new Date().toLocaleString()
+
+                    });
+
+                });
+
+        })
+        .then(function() {
 
             alert(
+                "Request Approved ✓\n\n" +
+                "The requested water limit has been applied."
+            );
 
-                "Unable to submit request.\n\n" +
+        })
+        .catch(function(error) {
 
-                "Please check your internet connection."
+            console.error(
+                "Approval error:",
+                error
+            );
 
+            alert(
+                "Unable to approve the request."
             );
 
         });
+}
+
+
+// =====================================
+// REJECT REQUEST
+// =====================================
+
+function rejectRequest(requestId) {
+
+    const requestRef =
+        database
+            .ref("waterLimitRequests")
+            .child(requestId);
+
+    requestRef.update({
+
+        status: "Rejected",
+
+        rejectedDate:
+            new Date().toLocaleString()
+
+    })
+    .then(function() {
+
+        alert(
+            "Request Rejected\n\n" +
+            "The household water limit remains unchanged."
+        );
+
+    })
+    .catch(function(error) {
+
+        console.error(
+            "Rejection error:",
+            error
+        );
+
+        alert(
+            "Unable to reject the request."
+        );
+
+    });
+}
+
+
+// =====================================
+// LOGOUT
+// =====================================
+
+function logoutAdmin() {
+
+    window.location.href = "index.html";
 
 }
 
+
 // =====================================
-// CONNECT WATER LIMIT REQUEST BUTTON
+// START
 // =====================================
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    const requestedLimit =
-        document.getElementById("requestedLimit");
-
-    if (!requestedLimit) return;
-
-
-    // Find the form containing the request fields
-    const form =
-        requestedLimit.closest("form");
-
-
-    if (form) {
-
-        form.addEventListener("submit", function (event) {
-
-            event.preventDefault();
-
-            submitLimitRequest();
-
-        });
-
-    }
-
-
-    // Also connect a request/submit button if present
-    const buttons =
-        document.querySelectorAll("button");
-
-
-    buttons.forEach(function (button) {
-
-        const text =
-            button.textContent.toLowerCase().trim();
-
-
-        if (
-            text.includes("submit") &&
-            text.includes("request")
-        ) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    submitLimitRequest();
-
-                }
-            );
-
-        }
-
-    });
-
-});
+loadRequests();
