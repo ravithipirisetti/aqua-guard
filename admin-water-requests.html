@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Water Requests</title>
+
+    <link rel="stylesheet" href="admin-water-requests.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">💧</div>
+
+        <div>
+            <strong>AQUA GUARD</strong>
+            <small>ADMIN PORTAL</small>
+        </div>
+    </div>
+
+    <nav>
+
+        <a href="admin-dashboard.html">▣ Dashboard</a>
+
+        <a href="admin-households.html">⌂ Households</a>
+
+        <a href="admin-water-usage.html">💧 Water Usage</a>
+
+        <a href="admin-alerts.html">⚠ Alerts</a>
+
+        <a href="admin-water-requests.html" class="active">
+            📋 Water Requests
+        </a>
+
+        <a href="admin-reports.html">📊 Reports</a>
+
+        <a href="admin-settings.html">⚙ Settings</a>
+
+    </nav>
+
+    <button class="logout" onclick="logoutAdmin()">
+        ↪ Logout
+    </button>
+
+</div>
+
+
+<main>
+
+    <div class="topbar">
+
+        <div>
+            <span>ADMIN CONTROL CENTER</span>
+            <h1>Water Limit Requests</h1>
+        </div>
+
+        <div class="admin-user">
+            🛡️
+            <div>
+                <strong id="adminName">Admin</strong>
+                <small>Authorized Admin</small>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="info-banner">
+        <strong>Water Limit Extension Applications</strong>
+
+        <p>
+            Review household requests for temporary water-limit extensions.
+            Approved limits will be applied to the household automatically.
+        </p>
+    </div>
+
+
+    <section class="request-card">
+
+        <div class="request-header">
+
+            <div>
+                <span>APPLICATION</span>
+                <h2>Pending Water Limit Requests</h2>
+            </div>
+
+            <span id="requestCount" class="count">0</span>
+
+        </div>
+
+
+        <div id="requestContainer">
+
+            <!-- Request will appear here -->
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="admin-water-requests.js"></script>
+
+</body>
+</html>

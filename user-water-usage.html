@@ -17,41 +17,68 @@
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-icon">💧</div>
+
+            <div class="brand-icon">
+                💧
+            </div>
 
             <div>
                 <h2>AQUA GUARD</h2>
                 <span>SMART WATER MANAGEMENT</span>
             </div>
+
         </div>
 
 
         <nav>
 
-            <button class="nav-item" onclick="window.location.href='user-dashboard.html'">
+            <button
+                class="nav-item"
+                onclick="window.location.href='user-dashboard.html'">
+
                 <span>▣</span>
                 Dashboard
+
             </button>
+
 
             <button class="nav-item active">
+
                 <span>💧</span>
                 Water Usage
+
             </button>
 
-            <button class="nav-item" onclick="window.location.href='user-alerts.html'">
+
+            <button
+                class="nav-item"
+                onclick="window.location.href='user-alerts.html'">
+
                 <span>⚠</span>
                 Alerts
+
                 <b>2</b>
+
             </button>
 
-            <button class="nav-item" onclick="window.location.href='user-reports.html'">
+
+            <button
+                class="nav-item"
+                onclick="window.location.href='user-reports.html'">
+
                 <span>📊</span>
                 Reports
+
             </button>
 
-            <button class="nav-item" onclick="window.location.href='user-settings.html'">
+
+            <button
+                class="nav-item"
+                onclick="window.location.href='user-settings.html'">
+
                 <span>⚙</span>
                 Settings
+
             </button>
 
         </nav>
@@ -60,16 +87,23 @@
         <div class="sidebar-bottom">
 
             <div class="support">
+
                 <span>?</span>
 
                 <div>
                     <strong>Need Help?</strong>
                     <small>Contact Aqua Guard</small>
                 </div>
+
             </div>
 
-            <button class="logout-btn" onclick="goHome()">
+
+            <button
+                class="logout-btn"
+                onclick="goHome()">
+
                 ← Logout
+
             </button>
 
         </div>
@@ -81,12 +115,22 @@
 
     <main class="main">
 
+        <!-- TOPBAR -->
+
         <header class="topbar">
 
             <div>
-                <p class="welcome">WATER MONITORING</p>
-                <h1>Water Usage</h1>
+
+                <p class="welcome">
+                    WATER MONITORING
+                </p>
+
+                <h1>
+                    Water Usage
+                </h1>
+
             </div>
+
 
             <div class="profile">
 
@@ -95,8 +139,15 @@
                 </div>
 
                 <div>
-                    <strong>User Account</strong>
-                    <small>Household • AG-001</small>
+
+                    <strong>
+                        User Account
+                    </strong>
+
+                    <small>
+                        Household • AG-001
+                    </small>
+
                 </div>
 
             </div>
@@ -104,50 +155,96 @@
         </header>
 
 
-        <!-- SUMMARY -->
+        <!-- STAT CARDS -->
 
         <section class="stats-grid">
 
+
+            <!-- TODAY -->
+
             <div class="stat-card">
 
-                <span>TODAY'S USAGE</span>
+                <span>
+                    TODAY'S USAGE
+                </span>
 
-                <h2>184 <small>L</small></h2>
+                <h2>
+                    184
+                    <small>L</small>
+                </h2>
 
-                <p>Daily limit: 250 L</p>
+                <p>
+                    Daily limit:
+                    <span id="dailyLimit">
+                        250
+                    </span>
+                    L
+                </p>
 
             </div>
 
 
+            <!-- THIS WEEK -->
+
             <div class="stat-card">
 
-                <span>THIS WEEK</span>
+                <span>
+                    THIS WEEK
+                </span>
 
-                <h2>1,286 <small>L</small></h2>
+                <h2>
+                    1,286
+                    <small>L</small>
+                </h2>
 
-                <p>Average: 183.7 L/day</p>
+                <p>
+                    Average: 183.7 L/day
+                </p>
 
             </div>
 
 
+            <!-- THIS MONTH -->
+
             <div class="stat-card">
 
-                <span>THIS MONTH</span>
+                <span>
+                    THIS MONTH
+                </span>
 
-                <h2>5,472 <small>L</small></h2>
+                <h2>
+                    5,472
+                    <small>L</small>
+                </h2>
 
-                <p>Current month</p>
+                <p>
+                    Current month
+                </p>
 
             </div>
 
 
+            <!-- REMAINING -->
+
             <div class="stat-card">
 
-                <span>REMAINING TODAY</span>
+                <span>
+                    REMAINING TODAY
+                </span>
 
-                <h2 class="blue-text">66 <small>L</small></h2>
+                <h2 class="blue-text">
 
-                <p>Available water budget</p>
+                    <span id="remainingWater">
+                        66
+                    </span>
+
+                    <small>L</small>
+
+                </h2>
+
+                <p>
+                    Available water budget
+                </p>
 
             </div>
 
@@ -161,9 +258,17 @@
             <div class="panel-header">
 
                 <div>
-                    <small>DAILY CONSUMPTION</small>
-                    <h2>Today's Water Usage</h2>
+
+                    <small>
+                        DAILY CONSUMPTION
+                    </small>
+
+                    <h2>
+                        Today's Water Usage
+                    </h2>
+
                 </div>
+
 
                 <span class="live-badge">
                     ● LIVE
@@ -174,25 +279,56 @@
 
             <div class="usage-progress">
 
+
                 <div class="progress-info">
 
-                    <strong>184 L</strong>
+                    <strong>
+                        184 L
+                    </strong>
 
-                    <span>of 250 L daily limit</span>
+                    <span>
+
+                        of
+                        <span id="progressLimit">
+                            250
+                        </span>
+                        L daily limit
+
+                    </span>
 
                 </div>
+
 
                 <div class="progress-bar">
 
-                    <div style="width: 73.6%"></div>
+                    <div
+                        id="usageProgress"
+                        style="width: 73.6%">
+                    </div>
 
                 </div>
 
+
                 <div class="progress-footer">
 
-                    <span>73.6% used</span>
+                    <span>
 
-                    <strong>66 L remaining</strong>
+                        <span id="usagePercentage">
+                            73.6
+                        </span>% used
+
+                    </span>
+
+
+                    <strong>
+
+                        <span id="progressRemaining">
+                            66
+                        </span>
+
+                        L remaining
+
+                    </strong>
 
                 </div>
 
@@ -208,13 +344,28 @@
             <div class="panel-header">
 
                 <div>
-                    <small>WEEKLY CONSUMPTION</small>
-                    <h2>Usage Overview</h2>
+
+                    <small>
+                        WEEKLY CONSUMPTION
+                    </small>
+
+                    <h2>
+                        Usage Overview
+                    </h2>
+
                 </div>
 
+
                 <select>
-                    <option>This Week</option>
-                    <option>Last Week</option>
+
+                    <option>
+                        This Week
+                    </option>
+
+                    <option>
+                        Last Week
+                    </option>
+
                 </select>
 
             </div>
@@ -222,61 +373,120 @@
 
             <div class="chart">
 
+
                 <div class="chart-row">
+
                     <span>Mon</span>
+
                     <div class="bar-container">
-                        <div class="bar" style="width: 62%"></div>
+                        <div
+                            class="bar"
+                            style="width: 62%">
+                        </div>
                     </div>
+
                     <strong>155 L</strong>
+
                 </div>
 
+
                 <div class="chart-row">
+
                     <span>Tue</span>
+
                     <div class="bar-container">
-                        <div class="bar" style="width: 72%"></div>
+                        <div
+                            class="bar"
+                            style="width: 72%">
+                        </div>
                     </div>
+
                     <strong>180 L</strong>
+
                 </div>
 
+
                 <div class="chart-row">
+
                     <span>Wed</span>
+
                     <div class="bar-container">
-                        <div class="bar" style="width: 58%"></div>
+                        <div
+                            class="bar"
+                            style="width: 58%">
+                        </div>
                     </div>
+
                     <strong>145 L</strong>
+
                 </div>
 
+
                 <div class="chart-row">
+
                     <span>Thu</span>
+
                     <div class="bar-container">
-                        <div class="bar" style="width: 82%"></div>
+                        <div
+                            class="bar"
+                            style="width: 82%">
+                        </div>
                     </div>
+
                     <strong>205 L</strong>
+
                 </div>
 
+
                 <div class="chart-row">
+
                     <span>Fri</span>
+
                     <div class="bar-container">
-                        <div class="bar" style="width: 68%"></div>
+                        <div
+                            class="bar"
+                            style="width: 68%">
+                        </div>
                     </div>
+
                     <strong>170 L</strong>
+
                 </div>
 
+
                 <div class="chart-row">
+
                     <span>Sat</span>
+
                     <div class="bar-container">
-                        <div class="bar" style="width: 90%"></div>
+                        <div
+                            class="bar"
+                            style="width: 90%">
+                        </div>
                     </div>
+
                     <strong>225 L</strong>
+
                 </div>
+
 
                 <div class="chart-row today">
+
                     <span>Sun</span>
+
                     <div class="bar-container">
-                        <div class="bar" style="width: 74%"></div>
+
+                        <div
+                            class="bar"
+                            style="width: 74%">
+                        </div>
+
                     </div>
+
                     <strong>184 L</strong>
+
                 </div>
+
 
             </div>
 
@@ -287,50 +497,108 @@
 
         <section class="bottom-grid">
 
+
+            <!-- BOREWELL -->
+
             <div class="panel">
 
                 <div class="panel-header">
+
                     <div>
-                        <small>WATER SOURCE</small>
-                        <h2>Borewell Activity</h2>
+
+                        <small>
+                            WATER SOURCE
+                        </small>
+
+                        <h2>
+                            Borewell Activity
+                        </h2>
+
                     </div>
+
                 </div>
+
 
                 <div class="source-status">
 
-                    <div class="source-icon">⚡</div>
-
-                    <div>
-                        <strong>Borewell Motor Active</strong>
-                        <span>Automatic system control</span>
+                    <div class="source-icon">
+                        ⚡
                     </div>
 
-                    <b>RUNNING</b>
+
+                    <div>
+
+                        <strong>
+                            Borewell Motor Active
+                        </strong>
+
+                        <span>
+                            Automatic system control
+                        </span>
+
+                    </div>
+
+
+                    <b>
+                        RUNNING
+                    </b>
 
                 </div>
 
             </div>
 
 
+            <!-- DAILY LIMIT -->
+
             <div class="panel">
 
                 <div class="panel-header">
+
                     <div>
-                        <small>CONSUMPTION STATUS</small>
-                        <h2>Daily Limit</h2>
+
+                        <small>
+                            CONSUMPTION STATUS
+                        </small>
+
+                        <h2>
+                            Daily Limit
+                        </h2>
+
                     </div>
+
                 </div>
+
 
                 <div class="limit-status">
 
-                    <div class="limit-circle">
+
+                    <div
+                        class="limit-circle"
+                        id="limitCircle">
+
                         73.6%
+
                     </div>
 
+
                     <div>
-                        <strong>Within Limit</strong>
-                        <span>66 L remaining today</span>
+
+                        <strong>
+                            Within Limit
+                        </strong>
+
+                        <span>
+
+                            <span id="limitRemaining">
+                                66
+                            </span>
+
+                            L remaining today
+
+                        </span>
+
                     </div>
+
 
                 </div>
 
@@ -339,13 +607,23 @@
         </section>
 
 
+        <!-- FOOTER -->
+
         <footer>
 
-            <span>© 2026 Aqua Guard</span>
+            <span>
+                © 2026 Aqua Guard
+            </span>
+
 
             <span>
+
                 Last updated:
-                <b id="lastUpdated">Just now</b>
+
+                <b id="lastUpdated">
+                    Just now
+                </b>
+
             </span>
 
         </footer>
