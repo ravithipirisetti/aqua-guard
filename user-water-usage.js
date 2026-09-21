@@ -2,113 +2,126 @@
 // AQUA GUARD - USER WATER USAGE
 // =====================================
 
-function goHome() {
-    window.location.href = "index.html";
-}
+function loadWaterUsage() {
 
-
-// =====================================
-// CURRENT WATER USAGE
-// =====================================
-
-function updateWaterUsage() {
-
-    // Current day's usage
     const todayUsage = 184;
 
-    // Get approved water limit
-    const savedLimit =
-        Number(localStorage.getItem("userWaterLimit")) || 250;
+    // Read approved limit from Firebase
+    database
+        .ref("households/AG-001/waterLimit")
+        .once("value")
+        .then(function(snapshot) {
 
-    // Calculate remaining water
-    const remaining =
-        Math.max(savedLimit - todayUsage, 0);
+            let dailyLimit = snapshot.val();
 
-    // Calculate percentage used
-    const percentage =
-        Math.min((todayUsage / savedLimit) * 100, 100);
+            // Fallback if Firebase doesn't have a limit yet
+            if (!dailyLimit) {
+                dailyLimit =
+                    Number(localStorage.getItem("userWaterLimit")) || 250;
+            }
 
+            dailyLimit = Number(dailyLimit);
 
-    // Daily limit
-    const dailyLimit =
-        document.getElementById("dailyLimit");
+            const remaining =
+                Math.max(dailyLimit - todayUsage, 0);
 
-    if (dailyLimit) {
-        dailyLimit.textContent = savedLimit;
-    }
+            const percentage =
+                Math.min(
+                    (todayUsage / dailyLimit) * 100,
+                    100
+                );
 
+            // =====================================
+            // UPDATE PAGE
+            // =====================================
 
-    // Remaining water
-    const remainingWater =
-        document.getElementById("remainingWater");
+            const dailyLimitElement =
+                document.getElementById("dailyLimit");
 
-    if (remainingWater) {
-        remainingWater.textContent = remaining;
-    }
-
-
-    // Progress limit
-    const progressLimit =
-        document.getElementById("progressLimit");
-
-    if (progressLimit) {
-        progressLimit.textContent = savedLimit;
-    }
+            if (dailyLimitElement) {
+                dailyLimitElement.textContent =
+                    dailyLimit + " L";
+            }
 
 
-    // Percentage
-    const usagePercentage =
-        document.getElementById("usagePercentage");
+            const remainingElement =
+                document.getElementById("remainingWater");
 
-    if (usagePercentage) {
-        usagePercentage.textContent =
-            percentage.toFixed(1);
-    }
-
-
-    // Progress bar
-    const usageProgress =
-        document.getElementById("usageProgress");
-
-    if (usageProgress) {
-        usageProgress.style.width =
-            percentage + "%";
-    }
+            if (remainingElement) {
+                remainingElement.textContent =
+                    remaining + " L";
+            }
 
 
-    // Remaining in progress section
-    const progressRemaining =
-        document.getElementById("progressRemaining");
+            const percentageElement =
+                document.getElementById("usagePercentage");
 
-    if (progressRemaining) {
-        progressRemaining.textContent =
-            remaining;
-    }
-
-
-    // Bottom percentage circle
-    const limitCircle =
-        document.getElementById("limitCircle");
-
-    if (limitCircle) {
-        limitCircle.textContent =
-            percentage.toFixed(1) + "%";
-    }
+            if (percentageElement) {
+                percentageElement.textContent =
+                    percentage.toFixed(1) + "%";
+            }
 
 
-    // Bottom remaining
-    const limitRemaining =
-        document.getElementById("limitRemaining");
+            const progressLimit =
+                document.getElementById("progressLimit");
 
-    if (limitRemaining) {
-        limitRemaining.textContent =
-            remaining;
-    }
+            if (progressLimit) {
+                progressLimit.textContent =
+                    dailyLimit + " L";
+            }
+
+
+            const progressRemaining =
+                document.getElementById("progressRemaining");
+
+            if (progressRemaining) {
+                progressRemaining.textContent =
+                    remaining + " L";
+            }
+
+
+            const usageProgress =
+                document.getElementById("usageProgress");
+
+            if (usageProgress) {
+                usageProgress.style.width =
+                    percentage + "%";
+            }
+
+
+            const limitCircle =
+                document.getElementById("limitCircle");
+
+            if (limitCircle) {
+                limitCircle.style.setProperty(
+                    "--progress",
+                    percentage + "%"
+                );
+            }
+
+
+            const limitRemaining =
+                document.getElementById("limitRemaining");
+
+            if (limitRemaining) {
+                limitRemaining.textContent =
+                    remaining + " L";
+            }
+
+        })
+        .catch(function(error) {
+
+            console.error(
+                "Firebase water limit error:",
+                error
+            );
+
+        });
 }
 
 
 // =====================================
-// LAST UPDATED TIME
+// TIME
 // =====================================
 
 function updateTime() {
@@ -129,11 +142,22 @@ function updateTime() {
 
 
 // =====================================
+// LOGOUT
+// =====================================
+
+function goHome() {
+
+    window.location.href =
+        "index.html";
+}
+
+
+// =====================================
 // START
 // =====================================
 
-updateWaterUsage();
+loadWaterUsage();
 
 updateTime();
 
-setInterval(updateTime, 60000);
+setInterval(updateTime, 5000);

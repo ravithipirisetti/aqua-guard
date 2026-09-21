@@ -184,72 +184,75 @@ function loadRequests() {
 
 function approveRequest(requestId) {
 
-    const savedRequests =
-        localStorage.getItem("waterLimitRequests");
+    const requestRef =
+        database
+            .ref("waterLimitRequests")
+            .child(requestId);
 
-    if (!savedRequests) return;
+    requestRef.once("value")
+        .then(function(snapshot) {
 
+            const request = snapshot.val();
 
-    let requests =
-        JSON.parse(savedRequests);
+            if (!request) {
 
+                alert("Request not found.");
+                return;
 
-    const requestIndex =
-        requests.findIndex(
-            request => request.id === requestId
-        );
+            }
 
+            // =====================================
+            // UPDATE HOUSEHOLD WATER LIMIT
+            // =====================================
 
-    if (requestIndex === -1) {
+            return database
+                .ref("households")
+                .child(request.household)
+                .update({
 
-        alert("Request not found.");
+                    waterLimit:
+                        Number(request.requestedLimit)
 
-        return;
-    }
+                })
+                .then(function() {
 
+                    // =====================================
+                    // UPDATE REQUEST STATUS
+                    // =====================================
 
-    const request =
-        requests[requestIndex];
+                    return requestRef.update({
 
+                        status: "Approved",
 
-    // Apply new water limit
-   const currentLimit =
-    Number(localStorage.getItem("userWaterLimit")) || 250;
+                        approvedDate:
+                            new Date().toLocaleString()
 
-const approvedLimit =
-    Math.max(currentLimit, Number(request.requestedLimit));
+                    });
 
-localStorage.setItem(
-    "userWaterLimit",
-    approvedLimit
-);
+                });
 
+        })
+        .then(function() {
 
-    // Update request status
-    request.status = "Approved";
+            alert(
+                "Request Approved ✓\n\n" +
+                "New Water Limit: " +
+                "The requested limit has been applied."
+            );
 
+        })
+        .catch(function(error) {
 
-    request.approvedDate =
-        new Date().toLocaleString();
+            console.error(
+                "Approval error:",
+                error
+            );
 
+            alert(
+                "Unable to approve the request."
+            );
 
-    // Save updated requests
-    localStorage.setItem(
-        "waterLimitRequests",
-        JSON.stringify(requests)
-    );
-
-
-    alert(
-        "Request Approved ✓\n\n" +
-        request.household +
-        " water limit is now " +
-        request.requestedLimit +
-        " L."
-    );
-
-
-    loadRequests();
+        });
 }
 
 

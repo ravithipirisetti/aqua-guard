@@ -138,70 +138,17 @@ function submitLimitRequest() {
 
     // Validate requested limit
     if (requestedLimit === "") {
+
         alert("Please enter the requested water limit.");
+
         return;
     }
 
 
     // Validate reason
     if (reason === "") {
+
         alert("Please enter a reason for the request.");
-        return;
-    }
-
-
-    // Get existing requests
-    let requests = [];
-
-    const savedRequests =
-        localStorage.getItem("waterLimitRequests");
-
-
-    if (savedRequests) {
-
-        try {
-            requests = JSON.parse(savedRequests);
-        } catch (error) {
-            requests = [];
-        }
-
-    }
-
-
-    // =====================================
-    // CHECK 3 REQUESTS PER MONTH
-    // =====================================
-
-    const now = new Date();
-
-    const currentMonth =
-        now.getMonth();
-
-    const currentYear =
-        now.getFullYear();
-
-
-    const monthlyRequests =
-        requests.filter(request => {
-
-            const requestDate =
-                new Date(request.timestamp);
-
-            return (
-                requestDate.getMonth() === currentMonth &&
-                requestDate.getFullYear() === currentYear
-            );
-
-        });
-
-
-    if (monthlyRequests.length >= 3) {
-
-        alert(
-            "Monthly Request Limit Reached\n\n" +
-            "You can submit a maximum of 3 water-limit " +
-            "extension requests per month."
-        );
 
         return;
     }
@@ -221,9 +168,9 @@ function submitLimitRequest() {
     // CREATE REQUEST
     // =====================================
 
-    const request = {
+    const now = new Date();
 
-        id: Date.now(),
+    const request = {
 
         household: "AG-001",
 
@@ -247,36 +194,103 @@ function submitLimitRequest() {
     };
 
 
-    // Add request to array
-    requests.push(request);
+    // =====================================
+    // SAVE TO FIREBASE
+    // =====================================
+
+    database
+        .ref("waterLimitRequests")
+        .push(request)
+
+        .then(function () {
+
+            // Also keep a local copy
+            let requests = [];
+
+            const savedRequests =
+                localStorage.getItem("waterLimitRequests");
 
 
-    // Save requests
-    localStorage.setItem(
-        "waterLimitRequests",
-        JSON.stringify(requests)
-    );
+            if (savedRequests) {
+
+                try {
+
+                    requests =
+                        JSON.parse(savedRequests);
+
+                } catch (error) {
+
+                    requests = [];
+
+                }
+
+            }
 
 
-    // Show status
-    const status =
-        document.getElementById("requestStatus");
-
-    if (status) {
-
-        status.textContent =
-            "Extension request submitted. Waiting for administrator approval.";
-
-    }
+            request.id = Date.now();
 
 
-    alert(
-        "Water Limit Extension Request Submitted ✓\n\n" +
-        "Requested Limit: " +
-        requestedLimit +
-        " L\n\n" +
-        "Status: Pending"
-    );
+            requests.push(request);
+
+
+            localStorage.setItem(
+                "waterLimitRequests",
+                JSON.stringify(requests)
+            );
+
+
+            // =====================================
+            // SHOW STATUS
+            // =====================================
+
+            const status =
+                document.getElementById("requestStatus");
+
+
+            if (status) {
+
+                status.textContent =
+                    "Extension request submitted. Waiting for administrator approval.";
+
+            }
+
+
+            // =====================================
+            // SUCCESS MESSAGE
+            // =====================================
+
+            alert(
+
+                "Water Limit Extension Request Submitted ✓\n\n" +
+
+                "Requested Limit: " +
+                requestedLimit +
+                " L\n\n" +
+
+                "Status: Pending"
+
+            );
+
+        })
+
+        .catch(function (error) {
+
+            console.error(
+                "Firebase request error:",
+                error
+            );
+
+
+            alert(
+
+                "Unable to submit request.\n\n" +
+
+                "Please check your internet connection."
+
+            );
+
+        });
+
 }
 
 // =====================================
