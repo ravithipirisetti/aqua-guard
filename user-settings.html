@@ -26,7 +26,6 @@
             </div>
         </div>
 
-
         <nav>
 
             <button class="nav-item"
@@ -61,7 +60,6 @@
 
         </nav>
 
-
         <div class="sidebar-bottom">
 
             <button class="support-btn" onclick="showSupport()">
@@ -95,7 +93,6 @@
                 </p>
             </div>
 
-
             <div class="profile">
 
                 <div class="profile-avatar">
@@ -121,7 +118,7 @@
         <section class="settings-content">
 
 
-            <!-- ACCOUNT -->
+            <!-- ACCOUNT INFORMATION -->
             <div class="settings-card">
 
                 <div class="card-heading">
@@ -171,7 +168,7 @@
             </div>
 
 
-            <!-- WATER SETTINGS -->
+            <!-- WATER MANAGEMENT -->
             <div class="settings-card">
 
                 <div class="card-heading">
@@ -193,59 +190,19 @@
 
                 <div class="form-grid">
 
+                    <!-- DAILY LIMIT -->
                     <div class="form-group">
 
                         <label>Daily Water Limit</label>
 
                         <div class="input-with-unit">
 
-                        <input
-    type="number"
-    id="waterLimit"
-    value="250"
-    min="1"
-    disabled>
-
-    <div class="settings-section extension-section">
-
-    <h3>Water Limit Extension</h3>
-
-    <p class="section-description">
-        Need additional water for a temporary requirement?
-        Submit a request to the administrator.
-    </p>
-
-    <div class="form-group">
-        <label for="requestedLimit">Requested Water Limit (Litres)</label>
-
-        <input
-            type="number"
-            id="requestedLimit"
-            placeholder="Example: 350"
-            min="1">
-    </div>
-
-    <div class="form-group">
-        <label for="extensionReason">Reason</label>
-
-        <textarea
-            id="extensionReason"
-            rows="4"
-            placeholder="Enter the reason for requesting additional water..."></textarea>
-    </div>
-
-    <button
-        type="button"
-        class="save-btn"
-        onclick="submitLimitRequest()">
-        Submit Extension Request
-    </button>
-
-    <p id="requestStatus" class="request-status"></p>
-
-</div>
-
-
+                            <input
+                                type="number"
+                                id="waterLimit"
+                                value="250"
+                                min="1"
+                                disabled>
 
                             <span>L / day</span>
 
@@ -254,6 +211,7 @@
                     </div>
 
 
+                    <!-- WATER SOURCE -->
                     <div class="form-group">
 
                         <label>Water Source</label>
@@ -275,6 +233,64 @@
                         </select>
 
                     </div>
+
+                </div>
+
+
+                <!-- WATER LIMIT EXTENSION -->
+                <div class="settings-section extension-section">
+
+                    <h3>Water Limit Extension</h3>
+
+                    <p class="section-description">
+                        Need additional water for a temporary requirement?
+                        Submit a request to the administrator.
+                    </p>
+
+
+                    <div class="form-group">
+
+                        <label for="requestedLimit">
+                            Requested Water Limit (Litres)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="requestedLimit"
+                            placeholder="Example: 350"
+                            min="1">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="extensionReason">
+                            Reason
+                        </label>
+
+                        <textarea
+                            id="extensionReason"
+                            rows="4"
+                            placeholder="Enter the reason for requesting additional water..."></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="save-btn"
+                        onclick="submitLimitRequest()">
+
+                        Submit Extension Request
+
+                    </button>
+
+
+                    <p
+                        id="requestStatus"
+                        class="request-status">
+                    </p>
 
                 </div>
 
@@ -303,14 +319,19 @@
 
                 <div class="toggle-list">
 
+
                     <div class="toggle-row">
 
                         <div>
-                            <strong>Water Usage Alerts</strong>
+
+                            <strong>
+                                Water Usage Alerts
+                            </strong>
 
                             <p>
                                 Get notified when your water usage is high.
                             </p>
+
                         </div>
 
                         <label class="switch">
@@ -330,11 +351,15 @@
                     <div class="toggle-row">
 
                         <div>
-                            <strong>Daily Limit Alerts</strong>
+
+                            <strong>
+                                Daily Limit Alerts
+                            </strong>
 
                             <p>
                                 Receive alerts when approaching your daily limit.
                             </p>
+
                         </div>
 
                         <label class="switch">
@@ -354,11 +379,15 @@
                     <div class="toggle-row">
 
                         <div>
-                            <strong>System Notifications</strong>
+
+                            <strong>
+                                System Notifications
+                            </strong>
 
                             <p>
                                 Receive important Aqua Guard system updates.
                             </p>
+
                         </div>
 
                         <label class="switch">
@@ -373,6 +402,7 @@
                         </label>
 
                     </div>
+
 
                 </div>
 
@@ -389,11 +419,13 @@
                     </div>
 
                     <div>
+
                         <h3>Account Security</h3>
 
                         <p>
                             Security information for your account
                         </p>
+
                     </div>
 
                 </div>
@@ -407,7 +439,9 @@
 
                     <div>
 
-                        <strong>Account Secure</strong>
+                        <strong>
+                            Account Secure
+                        </strong>
 
                         <p>
                             Your Aqua Guard account is protected.
@@ -420,7 +454,7 @@
             </div>
 
 
-            <!-- SAVE -->
+            <!-- SAVE SETTINGS -->
             <div class="settings-actions">
 
                 <button
@@ -430,6 +464,7 @@
                     💾 Save Settings
 
                 </button>
+
 
                 <button
                     class="cancel-btn"
@@ -443,7 +478,9 @@
 
 
             <div class="demo-note">
+
                 Aqua Guard • Smart Water Management System • Demo Prototype
+
             </div>
 
 
@@ -454,11 +491,17 @@
 </div>
 
 
+<!-- FIREBASE -->
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script src="firebase-config.js"></script>
+
 <script src="user-settings.js"></script>
 
+
 </body>
+
 </html>

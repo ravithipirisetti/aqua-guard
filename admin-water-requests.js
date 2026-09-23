@@ -2,6 +2,11 @@
 // AQUA GUARD - ADMIN WATER REQUESTS
 // =====================================
 
+
+// =====================================
+// LOAD REQUESTS
+// =====================================
+
 function loadRequests() {
 
     const container =
@@ -10,11 +15,27 @@ function loadRequests() {
     const count =
         document.getElementById("requestCount");
 
+
+    if (!container || !count) {
+
+        console.error(
+            "Request container or request count element not found."
+        );
+
+        return;
+    }
+
+
     database
         .ref("waterLimitRequests")
         .on("value", function(snapshot) {
 
             const data = snapshot.val();
+
+
+            // ---------------------------------
+            // NO REQUESTS
+            // ---------------------------------
 
             if (!data) {
 
@@ -23,6 +44,7 @@ function loadRequests() {
                 container.innerHTML = `
                     <div class="no-request">
                         <h3>No pending applications</h3>
+
                         <p>
                             Water limit extension requests from
                             households will appear here.
@@ -33,16 +55,28 @@ function loadRequests() {
                 return;
             }
 
+
+            // ---------------------------------
+            // CONVERT FIREBASE DATA TO ARRAY
+            // ---------------------------------
+
             const requests =
                 Object.entries(data).map(function(entry) {
 
                     return {
+
                         id: entry[0],
+
                         ...entry[1]
+
                     };
 
                 });
 
+
+            // ---------------------------------
+            // ONLY PENDING REQUESTS
+            // ---------------------------------
 
             const pendingRequests =
                 requests.filter(function(request) {
@@ -56,14 +90,21 @@ function loadRequests() {
                 pendingRequests.length;
 
 
+            // ---------------------------------
+            // NO PENDING REQUESTS
+            // ---------------------------------
+
             if (pendingRequests.length === 0) {
 
                 container.innerHTML = `
                     <div class="no-request">
+
                         <h3>No pending applications</h3>
+
                         <p>
                             There are no requests waiting for approval.
                         </p>
+
                     </div>
                 `;
 
@@ -71,102 +112,142 @@ function loadRequests() {
             }
 
 
+            // ---------------------------------
+            // DISPLAY REQUESTS
+            // ---------------------------------
+
             container.innerHTML =
                 pendingRequests.map(function(request) {
 
                     return `
 
-                    <div class="request">
+                        <div class="request">
 
-                        <div class="request-top">
+                            <div class="request-top">
 
-                            <div>
-                                <h3>${request.household}</h3>
-                                <p>${request.email}</p>
+                                <div>
+
+                                    <h3>
+                                        ${request.household || "Unknown Household"}
+                                    </h3>
+
+                                    <p>
+                                        ${request.email || "No email provided"}
+                                    </p>
+
+                                </div>
+
+
+                                <span class="pending">
+                                    ${request.status || "Pending"}
+                                </span>
+
                             </div>
 
-                            <span class="pending">
-                                ${request.status}
-                            </span>
+
+                            <div class="details">
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Current Limit
+                                    </span>
+
+                                    <strong>
+                                        ${request.currentLimit || 0} L
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Requested Limit
+                                    </span>
+
+                                    <strong>
+                                        ${request.requestedLimit || 0} L
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Application Date
+                                    </span>
+
+                                    <strong>
+                                        ${request.date || "Not available"}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Household
+                                    </span>
+
+                                    <strong>
+                                        ${request.household || "Unknown"}
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="reason">
+
+                                <span>
+                                    REASON
+                                </span>
+
+                                <p>
+                                    ${request.reason || "No reason provided"}
+                                </p>
+
+                            </div>
+
+
+                            <div class="actions">
+
+
+                                <button
+                                    class="approve"
+                                    onclick="approveRequest('${request.id}')">
+
+                                    ✓ Approve Request
+
+                                </button>
+
+
+                                <button
+                                    class="reject"
+                                    onclick="rejectRequest('${request.id}')">
+
+                                    ✕ Reject Request
+
+                                </button>
+
+
+                            </div>
+
 
                         </div>
-
-
-                        <div class="details">
-
-                            <div class="detail">
-                                <span>Current Limit</span>
-                                <strong>
-                                    ${request.currentLimit} L
-                                </strong>
-                            </div>
-
-
-                            <div class="detail">
-                                <span>Requested Limit</span>
-                                <strong>
-                                    ${request.requestedLimit} L
-                                </strong>
-                            </div>
-
-
-                            <div class="detail">
-                                <span>Application Date</span>
-                                <strong>
-                                    ${request.date}
-                                </strong>
-                            </div>
-
-
-                            <div class="detail">
-                                <span>Household</span>
-                                <strong>
-                                    ${request.household}
-                                </strong>
-                            </div>
-
-                        </div>
-
-
-                        <div class="reason">
-
-                            <span>REASON</span>
-
-                            <p>
-                                ${request.reason}
-                            </p>
-
-                        </div>
-
-
-                        <div class="actions">
-
-                            <button
-                                class="approve"
-                                onclick="approveRequest('${request.id}')">
-
-                                ✓ Approve Request
-
-                            </button>
-
-
-                            <button
-                                class="reject"
-                                onclick="rejectRequest('${request.id}')">
-
-                                ✕ Reject Request
-
-                            </button>
-
-                        </div>
-
-                    </div>
 
                     `;
 
                 }).join("");
 
         })
+
 
         .catch(function(error) {
 
@@ -175,8 +256,23 @@ function loadRequests() {
                 error
             );
 
+
+            container.innerHTML = `
+                <div class="no-request">
+
+                    <h3>Unable to load requests</h3>
+
+                    <p>
+                        Please check the Firebase connection.
+                    </p>
+
+                </div>
+            `;
+
         });
+
 }
+
 
 
 // =====================================
@@ -192,6 +288,7 @@ function approveRequest(requestId) {
 
 
     requestRef.once("value")
+
         .then(function(snapshot) {
 
             const request =
@@ -200,16 +297,27 @@ function approveRequest(requestId) {
 
             if (!request) {
 
-                alert("Request not found.");
+                alert(
+                    "Request not found."
+                );
 
-                return;
+                return Promise.reject(
+                    new Error("Request not found")
+                );
 
             }
 
 
+            // ---------------------------------
+            // UPDATE HOUSEHOLD WATER LIMIT
+            // ---------------------------------
+
             return database
+
                 .ref("households")
+
                 .child(request.household)
+
                 .update({
 
                     waterLimit:
@@ -218,6 +326,11 @@ function approveRequest(requestId) {
                 })
 
                 .then(function() {
+
+
+                    // ---------------------------------
+                    // MARK REQUEST AS APPROVED
+                    // ---------------------------------
 
                     return requestRef.update({
 
@@ -232,6 +345,7 @@ function approveRequest(requestId) {
 
         })
 
+
         .then(function() {
 
             alert(
@@ -241,6 +355,7 @@ function approveRequest(requestId) {
 
         })
 
+
         .catch(function(error) {
 
             console.error(
@@ -248,13 +363,23 @@ function approveRequest(requestId) {
                 error
             );
 
-            alert(
-                "Unable to approve the request."
-            );
+
+            if (
+                error.message !==
+                "Request not found"
+            ) {
+
+                alert(
+                    "Unable to approve the request.\n\n" +
+                    error.message
+                );
+
+            }
 
         });
 
 }
+
 
 
 // =====================================
@@ -278,6 +403,7 @@ function rejectRequest(requestId) {
 
     })
 
+
     .then(function() {
 
         alert(
@@ -287,6 +413,7 @@ function rejectRequest(requestId) {
 
     })
 
+
     .catch(function(error) {
 
         console.error(
@@ -294,13 +421,16 @@ function rejectRequest(requestId) {
             error
         );
 
+
         alert(
-            "Unable to reject the request."
+            "Unable to reject the request.\n\n" +
+            error.message
         );
 
     });
 
 }
+
 
 
 // =====================================
@@ -313,6 +443,7 @@ function logoutAdmin() {
         "index.html";
 
 }
+
 
 
 // =====================================

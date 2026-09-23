@@ -20,3 +20,4 @@ firebase.initializeApp(firebaseConfig);
 
 // Firebase Realtime Database
 const database = firebase.database();
+const auth = firebase.auth();

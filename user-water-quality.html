@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Water Quality</title>
+
+    <link rel="stylesheet" href="user-water-quality.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">💧</div>
+
+            <div>
+                <h2>AQUA GUARD</h2>
+                <p>SMART WATER MANAGEMENT</p>
+            </div>
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="user-dashboard.html" class="nav-item">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="user-water-usage.html" class="nav-item">
+                <span>💧</span>
+                Water Usage
+            </a>
+
+            <a href="user-water-quality.html"
+               class="nav-item active">
+                <span>🧪</span>
+                Water Quality
+            </a>
+
+            <a href="user-alerts.html" class="nav-item">
+                <span>⚠</span>
+                Alerts
+                <b>2</b>
+            </a>
+
+            <a href="user-reports.html" class="nav-item">
+                <span>▤</span>
+                Reports
+            </a>
+
+            <a href="user-settings.html" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+
+        <button class="logout-btn" onclick="logoutUser()">
+            <span>↪</span>
+            Logout
+        </button>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Water Quality</h1>
+
+                <p>
+                    Monitor the quality of your household water supply
+                </p>
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    class="notification-btn"
+                    onclick="openAlerts()">
+
+                    🔔
+
+                    <span class="notification-badge">
+                        2
+                    </span>
+
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="profile-avatar">
+                        👤
+                    </div>
+
+                    <div>
+                        <strong>User</strong>
+
+                        <small id="householdDisplay">
+                            AG-001
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= OVERALL STATUS ================= -->
+
+        <section class="overall-card">
+
+            <div class="overall-icon">
+                💧
+            </div>
+
+            <div class="overall-info">
+
+                <p>OVERALL WATER QUALITY</p>
+
+                <h2 id="overallStatus">
+                    Normal
+                </h2>
+
+                <span id="lastUpdated">
+                    Last checked: Loading...
+                </span>
+
+            </div>
+
+
+            <div class="status-pill normal"
+                 id="overallPill">
+
+                ● Normal
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PARAMETERS ================= -->
+
+        <section>
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Water Quality Parameters</h2>
+
+                    <p>
+                        Current readings from your water-quality sensors
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quality-grid">
+
+
+                <!-- pH -->
+
+                <div class="quality-card">
+
+                    <div class="quality-card-top">
+
+                        <div class="parameter-icon">
+                            pH
+                        </div>
+
+                        <span
+                            class="parameter-status normal"
+                            id="phStatus">
+
+                            Normal
+
+                        </span>
+
+                    </div>
+
+
+                    <h3 id="phValue">
+                        7.2
+                    </h3>
+
+                    <p>pH Level</p>
+
+                    <div class="range-bar">
+
+                        <div
+                            class="range-fill"
+                            id="phBar"
+                            style="width: 72%;">
+                        </div>
+
+                    </div>
+
+                    <small>
+                        Typical monitoring range: 6.5–8.5
+                    </small>
+
+                </div>
+
+
+                <!-- TDS -->
+
+                <div class="quality-card">
+
+                    <div class="quality-card-top">
+
+                        <div class="parameter-icon">
+                            TDS
+                        </div>
+
+                        <span
+                            class="parameter-status normal"
+                            id="tdsStatus">
+
+                            Normal
+
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        <span id="tdsValue">
+                            420
+                        </span>
+
+                        <small>ppm</small>
+                    </h3>
+
+                    <p>Total Dissolved Solids</p>
+
+                    <div class="range-bar">
+
+                        <div
+                            class="range-fill"
+                            id="tdsBar"
+                            style="width: 42%;">
+                        </div>
+
+                    </div>
+
+                    <small>
+                        Sensor-based monitoring
+                    </small>
+
+                </div>
+
+
+                <!-- Turbidity -->
+
+                <div class="quality-card">
+
+                    <div class="quality-card-top">
+
+                        <div class="parameter-icon">
+                            NTU
+                        </div>
+
+                        <span
+                            class="parameter-status normal"
+                            id="turbidityStatus">
+
+                            Normal
+
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        <span id="turbidityValue">
+                            1.8
+                        </span>
+
+                        <small>NTU</small>
+
+                    </h3>
+
+                    <p>Turbidity</p>
+
+                    <div class="range-bar">
+
+                        <div
+                            class="range-fill"
+                            id="turbidityBar"
+                            style="width: 18%;">
+                        </div>
+
+                    </div>
+
+                    <small>
+                        Lower values generally indicate clearer water
+                    </small>
+
+                </div>
+
+
+                <!-- Temperature -->
+
+                <div class="quality-card">
+
+                    <div class="quality-card-top">
+
+                        <div class="parameter-icon">
+                            °C
+                        </div>
+
+                        <span
+                            class="parameter-status normal"
+                            id="temperatureStatus">
+
+                            Normal
+
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        <span id="temperatureValue">
+                            27
+                        </span>
+
+                        <small>°C</small>
+
+                    </h3>
+
+                    <p>Water Temperature</p>
+
+                    <div class="range-bar">
+
+                        <div
+                            class="range-fill"
+                            id="temperatureBar"
+                            style="width: 54%;">
+                        </div>
+
+                    </div>
+
+                    <small>
+                        Current incoming water temperature
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ALERT ================= -->
+
+        <section class="quality-alert"
+                 id="qualityAlert">
+
+            <div class="alert-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    No abnormal water-quality reading detected
+                </h3>
+
+                <p>
+                    Current sensor readings are within the configured
+                    monitoring ranges.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HISTORY ================= -->
+
+        <section class="history-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>Recent Readings</h2>
+
+                    <p>
+                        Latest water-quality measurements
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Time</th>
+                            <th>pH</th>
+                            <th>TDS</th>
+                            <th>Turbidity</th>
+                            <th>Temperature</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="qualityHistory">
+
+                        <tr>
+
+                            <td>10:45 AM</td>
+                            <td>7.2</td>
+                            <td>421 ppm</td>
+                            <td>1.8 NTU</td>
+                            <td>27°C</td>
+
+                            <td>
+                                <span class="table-status normal">
+                                    Normal
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>10:30 AM</td>
+                            <td>7.2</td>
+                            <td>418 ppm</td>
+                            <td>1.7 NTU</td>
+                            <td>27°C</td>
+
+                            <td>
+                                <span class="table-status normal">
+                                    Normal
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>10:15 AM</td>
+                            <td>7.1</td>
+                            <td>425 ppm</td>
+                            <td>1.9 NTU</td>
+                            <td>27°C</td>
+
+                            <td>
+                                <span class="table-status normal">
+                                    Normal
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= INFORMATION ================= -->
+
+        <section class="info-card">
+
+            <div class="info-icon">
+                ℹ
+            </div>
+
+            <div>
+
+                <h3>About Water Quality Monitoring</h3>
+
+                <p>
+                    Aqua Guard monitors selected water-quality parameters
+                    to identify abnormal readings. An abnormal sensor
+                    reading does not by itself confirm contamination.
+                    Further verification or appropriate testing may be
+                    required.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= FIREBASE ================= -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script src="user-water-quality.js"></script>
+
+</body>
+</html>

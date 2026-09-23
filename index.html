@@ -2,93 +2,146 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="google-site-verification" content="dJGvr4y-sOYJFEF-fy1fuppsv3aUOWPb67vXzhVImLE" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Aqua Guard | Login</title>
+    <title>Aqua Guard | Smart Water Management</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
+
+    <!-- =====================================
+         LOGIN PAGE
+         ===================================== -->
+
     <div class="login-page">
 
-        <div class="login-card">
 
-            <div class="login-logo">
+        <!-- BRAND -->
+
+        <div class="login-brand">
+
+            <div class="water-logo">
                 💧
             </div>
 
-            <div class="login-brand">
-                <h1>AQUA GUARD</h1>
-                <span>SMART WATER MANAGEMENT</span>
-            </div>
+            <h1>
+                AQUA GUARD
+            </h1>
 
-            <div class="login-heading">
-                <h2>Welcome back</h2>
-                <p>Sign in to access your household water dashboard.</p>
-            </div>
-
-            <form onsubmit="loginUser(event)">
-
-                <label>Email Address</label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    required
-                >
-
-                <label>Password</label>
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    required
-                >
-
-                <div class="login-options">
-
-                    <label class="remember">
-                        <input type="checkbox">
-                        Remember me
-                    </label>
-
-                    <a href="#" onclick="forgotPassword(event)">
-                        Forgot password?
-                    </a>
-
-                </div>
-
-                <button type="submit" class="login-main-btn">
-                    Sign In
-                    <span>→</span>
-                </button>
-
-            </form>
-
-            <div class="login-security">
-                🛡️ Secure Aqua Guard Access
-            </div>
-
-            <button class="admin-portal-btn" onclick="window.location.href='admin-login.html'">
-    🛡️ Admin Portal
-</button>
-
-            <p class="demo-note">
-                Demo prototype • Aqua Guard
+            <p>
+                SMART WATER MANAGEMENT
             </p>
 
         </div>
 
+
+        <!-- LOGIN CARD -->
+
+        <div class="login-card">
+
+            <h2>
+                Welcome to Aqua Guard
+            </h2>
+
+            <p class="login-subtitle">
+                Sign in to access your household dashboard
+            </p>
+
+
+            <!-- GOOGLE LOGIN -->
+
+            <form
+                onsubmit="loginUser(event)"
+            >
+
+                <button
+                    type="submit"
+                    class="google-login-btn"
+                >
+
+                    <span class="google-icon">
+                        G
+                    </span>
+
+                    <span>
+                        Continue with Google
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <div class="login-divider">
+
+                <span>
+                    Secure authentication
+                </span>
+
+            </div>
+
+
+            <p class="login-info">
+
+                Your Google account is securely
+                authenticated by Firebase.
+
+            </p>
+
+            <p class="login-info">
+
+                Each account is automatically
+                linked to its own Aqua Guard
+                household ID.
+
+            </p>
+
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <p class="login-footer">
+
+            © 2026 Aqua Guard
+            <br>
+            Smart Water Management System
+
+        </p>
+
+
     </div>
 
+
+    <!-- =====================================
+         FIREBASE
+         ===================================== -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+
     <script src="script.js"></script>
+
 
 </body>
 

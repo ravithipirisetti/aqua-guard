@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aqua Guard | Admin Water Quality</title>
+
+    <link rel="stylesheet" href="admin-water-quality.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">💧</div>
+
+            <div>
+                <h2>AQUA GUARD</h2>
+                <p>ADMIN PANEL</p>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+
+            <a href="admin-dashboard.html" class="nav-item">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="admin-households.html" class="nav-item">
+                <span>⌂</span>
+                Households
+            </a>
+
+            <a href="admin-water-usage.html" class="nav-item">
+                <span>◉</span>
+                Water Usage
+            </a>
+
+            <a href="admin-water-quality.html" class="nav-item active">
+                <span>🧪</span>
+                Water Quality
+            </a>
+
+            <a href="admin-alerts.html" class="nav-item">
+                <span>⚠</span>
+                Alerts
+            </a>
+
+            <a href="admin-water-requests.html" class="nav-item">
+                <span>▤</span>
+                Water Requests
+            </a>
+
+            <a href="admin-reports.html" class="nav-item">
+                <span>▥</span>
+                Reports
+            </a>
+
+            <a href="admin-settings.html" class="nav-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <button class="logout-btn" onclick="logoutAdmin()">
+            ⇥ Logout
+        </button>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Water Quality Monitoring</h1>
+                <p>Monitor water-quality readings from connected households</p>
+            </div>
+
+            <div class="admin-profile">
+                <div class="profile-icon">A</div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Aqua Guard Admin</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- ================= SUMMARY CARDS ================= -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+                <div class="summary-icon blue">🏠</div>
+
+                <div>
+                    <span>Households Monitored</span>
+                    <strong id="householdCount">0</strong>
+                </div>
+            </div>
+
+
+            <div class="summary-card">
+                <div class="summary-icon green">✓</div>
+
+                <div>
+                    <span>Normal Readings</span>
+                    <strong id="normalCount">0</strong>
+                </div>
+            </div>
+
+
+            <div class="summary-card">
+                <div class="summary-icon orange">!</div>
+
+                <div>
+                    <span>Warnings</span>
+                    <strong id="warningCount">0</strong>
+                </div>
+            </div>
+
+
+            <div class="summary-card">
+                <div class="summary-icon red">⚠</div>
+
+                <div>
+                    <span>Abnormal</span>
+                    <strong id="abnormalCount">0</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= FILTER ================= -->
+
+        <section class="control-panel">
+
+            <div class="search-box">
+
+                <span>🔎</span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search household ID..."
+                >
+
+            </div>
+
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="normal">
+                    Normal
+                </option>
+
+                <option value="warning">
+                    Warning
+                </option>
+
+                <option value="abnormal">
+                    Abnormal
+                </option>
+
+            </select>
+
+
+            <button
+                class="refresh-btn"
+                onclick="loadWaterQuality()"
+            >
+                ↻ Refresh
+            </button>
+
+        </section>
+
+
+        <!-- ================= QUALITY TABLE ================= -->
+
+        <section class="quality-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Household Water Quality</h2>
+
+                    <p>
+                        Latest sensor readings received from Firebase
+                    </p>
+                </div>
+
+                <span id="connectionStatus" class="connection-status">
+                    ● Connecting...
+                </span>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Household</th>
+
+                            <th>pH</th>
+
+                            <th>TDS</th>
+
+                            <th>Turbidity</th>
+
+                            <th>Temperature</th>
+
+                            <th>Status</th>
+
+                            <th>Last Reading</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="qualityTableBody">
+
+                        <tr>
+
+                            <td colspan="8" class="empty-row">
+                                Loading water-quality data...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ALERT INFORMATION ================= -->
+
+        <section class="alert-information">
+
+            <div class="alert-information-icon">
+                ⚠
+            </div>
+
+            <div>
+
+                <h3>Water-quality alert information</h3>
+
+                <p>
+                    Abnormal sensor readings indicate that a
+                    parameter has moved outside the configured
+                    monitoring range. This does not by itself
+                    confirm contamination. Further verification
+                    may be required.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECENT ALERTS ================= -->
+
+        <section class="recent-alerts">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Recent Water-Quality Alerts</h2>
+
+                    <p>
+                        Readings requiring administrator attention
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div id="alertList" class="alert-list">
+
+                <div class="empty-alert">
+                    No water-quality alerts yet.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FIREBASE ================= -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+
+    <script src="admin-water-quality.js"></script>
+
+</body>
+</html>

@@ -313,3 +313,73 @@ input[type="password"]:focus {
         font-size: 24px;
     }
 }
+
+/* =====================================
+   GOOGLE LOGIN
+   ===================================== */
+
+.google-login-btn {
+    width: 100%;
+    height: 52px;
+
+    border: 1px solid #d9dee8;
+    border-radius: 9px;
+
+    background: white;
+    color: #202124;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.google-login-btn:hover {
+    background: #f7f9fc;
+    border-color: #bfc7d4;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.08);
+}
+
+.google-icon {
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    color: #4285f4;
+}
+
+.login-divider {
+    margin: 22px 0;
+
+    text-align: center;
+
+    color: #7b8794;
+    font-size: 12px;
+}
+
+.login-info {
+    text-align: center;
+
+    color: #7b8794;
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    margin-top: 10px;
+}

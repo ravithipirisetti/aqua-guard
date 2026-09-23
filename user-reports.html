@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Aqua Guard | Reports</title>
+    <title>Aqua Guard | User Settings</title>
 
-    <link rel="stylesheet" href="user-reports.css">
+    <link rel="stylesheet" href="user-settings.css">
 </head>
 
 <body>
@@ -22,15 +23,6 @@
             <div>
                 <h1>AQUA GUARD</h1>
                 <span>SMART WATER MANAGEMENT</span>
-            </div>
-        </div>
-
-        <div class="user-profile">
-            <div class="profile-avatar">U</div>
-
-            <div>
-                <strong>User Account</strong>
-                <span>Household • AG-001</span>
             </div>
         </div>
 
@@ -55,13 +47,13 @@
                 <b>2</b>
             </button>
 
-            <button class="nav-item active">
+            <button class="nav-item"
+                onclick="window.location.href='user-reports.html'">
                 <span>📊</span>
                 Reports
             </button>
 
-            <button class="nav-item"
-                onclick="window.location.href='user-settings.html'">
+            <button class="nav-item active">
                 <span>⚙</span>
                 Settings
             </button>
@@ -75,7 +67,7 @@
                 Support
             </button>
 
-            <button class="logout-btn" onclick="goHome()">
+            <button class="logout-btn" onclick="logoutUser()">
                 <span>↪</span>
                 Logout
             </button>
@@ -92,27 +84,29 @@
         <header class="topbar">
 
             <div>
-                <span class="eyebrow">WATER MONITORING</span>
-                <h2>Reports</h2>
+                <span class="eyebrow">ACCOUNT MANAGEMENT</span>
+
+                <h2>Settings</h2>
+
+                <p>
+                    Manage your Aqua Guard household preferences
+                </p>
             </div>
 
-            <div class="topbar-right">
+            <div class="profile">
 
-                <button class="notification-btn"
-                    onclick="showNotifications()">
-                    🔔
-                    <span>2</span>
-                </button>
+                <div class="profile-avatar">
+                    👤
+                </div>
 
-                <div class="top-profile">
+                <div>
+                    <strong id="userName">
+                        User Account
+                    </strong>
 
-                    <div class="profile-avatar">U</div>
-
-                    <div>
-                        <strong>User Account</strong>
-                        <span>Household • AG-001</span>
-                    </div>
-
+                    <span>
+                        Household • AG-001
+                    </span>
                 </div>
 
             </div>
@@ -121,286 +115,353 @@
 
 
         <!-- CONTENT -->
-        <section class="content">
+        <section class="settings-content">
 
-            <div class="page-intro">
 
-                <div>
-                    <span class="section-label">HOUSEHOLD ANALYTICS</span>
+            <!-- ACCOUNT -->
+            <div class="settings-card">
 
-                    <h1>Water Reports</h1>
+                <div class="card-heading">
 
-                    <p>
-                        Review your household water consumption,
-                        daily limits and usage patterns.
-                    </p>
+                    <div class="heading-icon">
+                        👤
+                    </div>
+
+                    <div>
+                        <h3>Account Information</h3>
+
+                        <p>
+                            Your Aqua Guard account details
+                        </p>
+                    </div>
+
                 </div>
 
-                <button class="generate-btn"
-                    onclick="generateReport()">
-                    📄 Generate Report
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Email Address</label>
+
+                        <input
+                            type="email"
+                            id="userEmail"
+                            placeholder="Enter email address">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Household ID</label>
+
+                        <input
+                            type="text"
+                            value="AG-001"
+                            disabled>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- WATER SETTINGS -->
+            <div class="settings-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        💧
+                    </div>
+
+                    <div>
+                        <h3>Water Management</h3>
+
+                        <p>
+                            Configure your household water preferences
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Daily Water Limit</label>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="waterLimit"
+                                value="250"
+                                min="1"
+                                disabled>
+
+                            <span>L / day</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Water Source</label>
+
+                        <select id="waterSource">
+
+                            <option value="borewell">
+                                Borewell
+                            </option>
+
+                            <option value="municipal">
+                                Municipal Supply
+                            </option>
+
+                            <option value="both">
+                                Borewell + Municipal
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WATER LIMIT EXTENSION -->
+
+                <div class="settings-section extension-section">
+
+                    <h3>Water Limit Extension</h3>
+
+                    <p class="section-description">
+                        Need additional water for a temporary requirement?
+                        Submit a request to the administrator.
+                    </p>
+
+
+                    <div class="form-group">
+
+                        <label for="requestedLimit">
+                            Requested Water Limit (Litres)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="requestedLimit"
+                            placeholder="Example: 350"
+                            min="1">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="extensionReason">
+                            Reason
+                        </label>
+
+                        <textarea
+                            id="extensionReason"
+                            rows="4"
+                            placeholder="Enter the reason for requesting additional water..."></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="save-btn"
+                        onclick="submitLimitRequest()">
+
+                        Submit Extension Request
+
+                    </button>
+
+
+                    <p
+                        id="requestStatus"
+                        class="request-status">
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICATIONS -->
+            <div class="settings-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        🔔
+                    </div>
+
+                    <div>
+                        <h3>Notifications</h3>
+
+                        <p>
+                            Choose which alerts you want to receive
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="toggle-list">
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>Water Usage Alerts</strong>
+
+                            <p>
+                                Get notified when your water usage is high.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="usageAlerts"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>Daily Limit Alerts</strong>
+
+                            <p>
+                                Receive alerts when approaching your daily limit.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="limitAlerts"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="toggle-row">
+
+                        <div>
+                            <strong>System Notifications</strong>
+
+                            <p>
+                                Receive important Aqua Guard system updates.
+                            </p>
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="systemAlerts"
+                                checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY -->
+            <div class="settings-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        🔒
+                    </div>
+
+                    <div>
+                        <h3>Account Security</h3>
+
+                        <p>
+                            Security information for your account
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="security-status">
+
+                    <div class="security-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>Account Secure</strong>
+
+                        <p>
+                            Your Aqua Guard account is protected.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAVE -->
+            <div class="settings-actions">
+
+                <button
+                    class="save-btn"
+                    onclick="saveSettings()">
+
+                    💾 Save Settings
+
+                </button>
+
+
+                <button
+                    class="cancel-btn"
+                    onclick="loadSettings()">
+
+                    Cancel
+
                 </button>
 
             </div>
 
 
-            <!-- REPORT PERIOD -->
-            <div class="period-panel">
-
-                <div>
-                    <span class="section-label">REPORT PERIOD</span>
-
-                    <h2>Select a reporting period</h2>
-                </div>
-
-                <select id="reportPeriod"
-                    onchange="updateReport()">
-
-                    <option value="daily">Today</option>
-                    <option value="weekly">This Week</option>
-                    <option value="monthly">This Month</option>
-
-                </select>
-
+            <div class="demo-note">
+                Aqua Guard • Smart Water Management System • Demo Prototype
             </div>
 
-
-            <!-- SUMMARY -->
-            <div class="stats-grid">
-
-                <div class="stat-card">
-
-                    <div class="stat-icon water">💧</div>
-
-                    <div>
-                        <span>TOTAL CONSUMPTION</span>
-                        <h2 id="totalUsage">184 L</h2>
-                        <p>Selected period</p>
-                    </div>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-icon average">📈</div>
-
-                    <div>
-                        <span>AVERAGE DAILY</span>
-                        <h2 id="averageUsage">184 L</h2>
-                        <p>Per day</p>
-                    </div>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-icon limit">🎯</div>
-
-                    <div>
-                        <span>DAILY LIMIT</span>
-                        <h2>250 L</h2>
-                        <p>Household allowance</p>
-                    </div>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-icon status">✓</div>
-
-                    <div>
-                        <span>LIMIT STATUS</span>
-                        <h2 id="limitStatus">Within Limit</h2>
-                        <p id="statusText">66 L remaining today</p>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DAILY BREAKDOWN -->
-            <div class="report-panel">
-
-                <div class="panel-header">
-
-                    <div>
-                        <span class="section-label">
-                            CONSUMPTION ANALYSIS
-                        </span>
-
-                        <h2>Daily Water Usage</h2>
-                    </div>
-
-                    <span class="period-label"
-                        id="periodLabel">
-                        Today
-                    </span>
-
-                </div>
-
-
-                <div class="chart">
-
-                    <div class="chart-row">
-                        <span>Morning</span>
-
-                        <div class="bar-track">
-                            <div class="bar" style="width: 28%;"></div>
-                        </div>
-
-                        <strong>52 L</strong>
-                    </div>
-
-
-                    <div class="chart-row">
-                        <span>Afternoon</span>
-
-                        <div class="bar-track">
-                            <div class="bar" style="width: 48%;"></div>
-                        </div>
-
-                        <strong>88 L</strong>
-                    </div>
-
-
-                    <div class="chart-row">
-                        <span>Evening</span>
-
-                        <div class="bar-track">
-                            <div class="bar" style="width: 24%;"></div>
-                        </div>
-
-                        <strong>44 L</strong>
-                    </div>
-
-
-                    <div class="chart-total">
-
-                        <span>Total</span>
-
-                        <strong>184 L</strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- INSIGHTS -->
-            <div class="bottom-grid">
-
-                <div class="insight-panel">
-
-                    <div class="panel-title">
-                        <span class="section-label">
-                            USAGE INSIGHT
-                        </span>
-
-                        <h2>Today's Summary</h2>
-                    </div>
-
-                    <div class="insight-list">
-
-                        <div class="insight-row">
-                            <span>Water Used</span>
-                            <strong>184 L</strong>
-                        </div>
-
-                        <div class="insight-row">
-                            <span>Daily Limit</span>
-                            <strong>250 L</strong>
-                        </div>
-
-                        <div class="insight-row">
-                            <span>Remaining</span>
-                            <strong>66 L</strong>
-                        </div>
-
-                        <div class="insight-row">
-                            <span>Usage Percentage</span>
-                            <strong>73.6%</strong>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="insight-panel">
-
-                    <div class="panel-title">
-                        <span class="section-label">
-                            SYSTEM STATUS
-                        </span>
-
-                        <h2>Water Source</h2>
-                    </div>
-
-                    <div class="source-status">
-
-                        <div class="source-icon">💧</div>
-
-                        <div>
-                            <strong>Borewell</strong>
-                            <span>Currently monitored</span>
-                        </div>
-
-                        <div class="online">
-                            <span></span>
-                            LIVE
-                        </div>
-
-                    </div>
-
-                    <div class="source-detail">
-                        Flow monitoring is active and Aqua Guard
-                        is tracking household consumption.
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- REPORT INFO -->
-            <div class="info-panel">
-
-                <div class="info-icon">📊</div>
-
-                <div>
-
-                    <h3>About Your Reports</h3>
-
-                    <p>
-                        Aqua Guard reports help you understand
-                        household water consumption and identify
-                        unusual usage patterns. Reports can be
-                        generated for different time periods.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- FOOTER -->
-            <footer>
-
-                <span>
-                    Aqua Guard • Smart Water Management
-                </span>
-
-                <span>
-                    Last updated:
-                    <strong id="lastUpdated">--:--</strong>
-                </span>
-
-            </footer>
 
         </section>
 
@@ -409,7 +470,16 @@
 </div>
 
 
-<script src="user-reports.js"></script>
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+
+<script src="user-settings.js"></script>
+
 
 </body>
 </html>
