@@ -27,12 +27,15 @@
 
             <div class="admin-heading">
                 <span>AUTHORIZED ACCESS</span>
+
                 <h2>Admin Sign In</h2>
+
                 <p>
                     Sign in to manage households, monitor water usage,
                     alerts and system activity.
                 </p>
             </div>
+
 
             <form onsubmit="adminLogin(event)">
 
@@ -45,6 +48,7 @@
                     required
                 >
 
+
                 <label>Password</label>
 
                 <input
@@ -54,23 +58,36 @@
                     required
                 >
 
-                <button type="submit" class="admin-login-btn">
+
+                <button
+                    type="submit"
+                    class="admin-login-btn"
+                >
                     Sign In
                     <span>→</span>
                 </button>
 
-                <!-- LOGIN ERROR -->
-                <p id="loginError" class="login-error"></p>
+
+                <p
+                    id="loginError"
+                    class="login-error"
+                ></p>
 
             </form>
 
-            <button class="back-button" onclick="goToUserLogin()">
+
+            <button
+                class="back-button"
+                onclick="goToUserLogin()"
+            >
                 ← Back to User Login
             </button>
+
 
             <div class="admin-security">
                 🔒 Secure Administrator Access
             </div>
+
 
             <p class="demo-note">
                 Demo prototype • Aqua Guard
@@ -79,6 +96,19 @@
         </div>
 
     </div>
+
+
+    <!-- =====================================
+         FIREBASE
+         ===================================== -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
 
     <script src="admin-login.js"></script>
 

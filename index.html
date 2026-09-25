@@ -58,33 +58,95 @@
             </h2>
 
             <p class="login-subtitle">
-                Sign in to access your household dashboard
+                Choose how you want to continue
             </p>
 
 
-            <!-- GOOGLE LOGIN -->
+            <!-- =====================================
+                 HOUSEHOLD LOGIN
+                 ===================================== -->
 
-            <form
-                onsubmit="loginUser(event)"
-            >
+            <div class="login-section">
 
-                <button
-                    type="submit"
-                    class="google-login-btn"
+                <h3>
+                    👤 Household Login
+                </h3>
+
+                <p class="login-option-text">
+                    Access your household water-management dashboard.
+                </p>
+
+
+                <form
+                    onsubmit="loginUser(event)"
                 >
 
-                    <span class="google-icon">
-                        G
+                    <button
+                        type="submit"
+                        class="google-login-btn"
+                    >
+
+                        <span class="google-icon">
+                            G
+                        </span>
+
+                        <span>
+                            Continue with Google
+                        </span>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+
+            <div class="login-divider">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+            <!-- =====================================
+                 ADMIN LOGIN
+                 ===================================== -->
+
+            <div class="login-section admin-section">
+
+                <h3>
+                    🔐 Admin Login
+                </h3>
+
+                <p class="login-option-text">
+                    Access the Aqua Guard administration panel.
+                </p>
+
+
+                <button
+                    type="button"
+                    class="admin-login-btn"
+                    onclick="openAdminLogin()"
+                >
+
+                    <span>
+                        Admin Login
                     </span>
 
                     <span>
-                        Continue with Google
+                        →
                     </span>
 
                 </button>
 
-            </form>
+            </div>
 
+
+            <!-- SECURITY INFORMATION -->
 
             <div class="login-divider">
 
@@ -97,16 +159,15 @@
 
             <p class="login-info">
 
-                Your Google account is securely
+                Household accounts are securely
                 authenticated by Firebase.
 
             </p>
 
             <p class="login-info">
 
-                Each account is automatically
-                linked to its own Aqua Guard
-                household ID.
+                Each Google account is linked to
+                its own Aqua Guard household ID.
 
             </p>
 

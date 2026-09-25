@@ -296,3 +296,11 @@ document.addEventListener(
 
     }
 );
+
+// =====================================
+// ADMIN LOGIN PAGE
+// =====================================
+
+function openAdminLogin() {
+    window.location.href = "admin-login.html";
+}
